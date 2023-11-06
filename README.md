@@ -1,13 +1,17 @@
-# 87944 - Statistical Data Analysis for Nuclear and Subnuclear Physics 2022/2023
+# 87944 - Statistical Data Analysis for Nuclear and Subnuclear Physics (Module 3) 2023/2024 
+# 96082 - Computer Science for High Energy Physics (Module 3) 2023/2024
 
-This repository contains material supporting the course "87944 - Statistical Data Analysis for Nuclear and Subnuclear Physics", Second cycle degree/2-year master in PHYSICS, ALMA MATER STUDIORUM - Università di Bologna, Academic Year 2022/2023.
+This repository contains material supporting the courses given at ALMA MATER STUDIORUM - Università di Bologna, Academic Year 2023/2024
+- "87944 - Statistical Data Analysis for Nuclear and Subnuclear Physics", 
+Second cycle degree/2-year master in PHYSICS;
+- "96082 - Computer Science for High Energy Physics", Second cycle degree/2-year master in ADVANCED METHODS IN PARTICLE PHYSICS.
 
 The `code` folder contains source code shown during the classes.
 
 The content of this repository can be downloaded by `git` command:
 
 ```shell
-git clone https://github.com/gabriele-sirri/sda2022
+git clone https://github.com/gabriele-sirri/sda2023
 ```
 or directly as `zip` file.
 
