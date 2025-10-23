@@ -1,49 +1,65 @@
-# 87944 - Statistical Data Analysis for Nuclear and Subnuclear Physics (Module 3) 2023/2024 
-# 96082 - Computer Science for High Energy Physics (Module 3) 2023/2024
+# Statistical Data Analysis for Nuclear and Subnuclear Physics  
+**Master’s Degree in Physics – University of Bologna**  
+**Academic Year 2025/2026**
 
-This repository contains material supporting the courses given at ALMA MATER STUDIORUM - Università di Bologna, Academic Year 2023/2024
-- "87944 - Statistical Data Analysis for Nuclear and Subnuclear Physics", 
-Second cycle degree/2-year master in PHYSICS;
-- "96082 - Computer Science for High Energy Physics", Second cycle degree/2-year master in ADVANCED METHODS IN PARTICLE PHYSICS.
+**Module 3**
 
-The `code` folder contains source code shown during the classes.
+Gabriele Sirri, INFN Bologna
 
-The content of this repository can be downloaded by `git` command:
+---
+This repository contains the materials for **Module 3** of the _Statistical Data Analysis for Nuclear and Subnuclear Physics_ course, part of the Master’s Degree in Physics at the University of Bologna.
 
-```shell
-git clone https://github.com/gabriele-sirri/sda2023
-```
-or directly as `zip` file.
-
-An introduction to Git can be found [here](https://github.com/rsreds/git_course).
+Cover some cases for statistical analysis in HEP using RooFit and RooStats as main tools
 
 ## Computing Environment
 
-The computing environment for data analysis requires:
+The reference environment is **Linux Ubuntu 24.04** on **Windows Subsystem for Linux (WSL) 2**, as used in the lab computers.
 
-* [ROOT](https://root.cern/) with RooStats and TMVA features enables.
-* editor/IDE: _Visual Studio Code_ (suggested), or others as `nano`, `vi`, `emacs`, _Eclipse_, ...
+The minimum required software tools are **ROOT** and **Jupyter**.
+The recommended editor is **Visual Studio Code**.  
 
-ROOT comes with a *C++* interpreter and integrates smoothly with *Python*. It works on Linux, macOS, or Windows. 
+link:  "WSL Setup Guide with ROOT, Jupyter, and VS Code (Ubuntu 24.04)"
 
-### Reference platform 
+Other Linux distributions, as well as Windows or macOS, are also acceptable provided you installed the software tools. 
 
-The reference platform is a Linux Ubuntu 22.04. Other recent Linux distributions (Ubuntu or other) can be fine, as well as other operating systems, such as Windows and MacOS.
+link: "Alternative environment: Jupyter Notebook on cloud (without persistance!)"
 
-For *Windows* users, the installation of Linux Ubuntu environment exploiting the Windows Subsystem for Linux (WSL) is *strongly recommended* without the need for a separate virtual machine or dual booting.
+---
 
-For setting up the platform, as well as for using other operating systems, such as Windows and MacOS, follow:
+You can download the repository using the following `git` command:
 
-* the instructions written [here](https://www.unibo.it/sitoweb/gabriele.sirri2/contenuti-utili/df5f946d) (in English but not completely up to date)
+```bash
+git clone https://github.com/gabriele-sirri/statistical-data-analysis
+```
+For a brief introduction to Git, please refer to this [Git Course](https://github.com/rsreds/git_course) (italian).
 
-* the [guides](https://github.com/Programmazione-per-la-Fisica/howto) developed for the course "Programmazione per la Fisica"(first cycle degree in Fisica, Università di Bologna) are a good reference
+## Documentation
+
+### ROOT reference guide:
+
+https://root.cern.ch/doc/master/classes.html
+
+RooFit manual 
+https://root.cern.ch/download/doc/RooFit_Users_Manual_2.91-33.pdf
+
+RooStats documentation
+https://twiki.cern.ch/twiki/bin/view/RooStats/WebHome
+
+### For setting up the platform, as well as for using other operating systems:
+
+*[ROOT installation](https://www.unibo.it/sitoweb/gabriele.sirri2/contenuti-utili/df5f946d) (in English but not completely up to date)
+
+* [guides](https://github.com/Programmazione-per-la-Fisica/howto) developed for the course "Programmazione per la Fisica"(first cycle degree in Fisica, Università di Bologna) are a good reference
   - [Windows Subsystem for Linux](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/WSLGuide.md) in Italian
   - [MacOS](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/macOSGuide.md) in Italian
   
   - [ROOT framework installation](https://github.com/Programmazione-per-la-Fisica/howto/tree/main/ROOT-installation) (in English)
 
-To familiarize yourself with Linux, the following guide is suggested:
+To familiarize yourself with Linux
+
 * [Linux tutorial](https://ryanstutorials.net/linuxtutorial/) is a comprehensive guide to Linux and Bash written by Ryan Chadwick. Chapters "The Command Line", "Basic Navigation", "File Manipulation" contain critical information.
+
+
 
 #### Alternative environment: Jupyter Notebook on cloud (without persistance!)
 This "Jupyter notebook" allows you to easily interact with ROOT using your browser. 
