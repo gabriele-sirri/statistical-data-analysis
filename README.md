@@ -24,11 +24,47 @@ The recommended code editor is **Visual Studio Code**.
 **Complete installation guide:**  
 [WSL Setup Guide with ROOT, Jupyter, and VS Code (Ubuntu 24.04)](./howto/root_on_wsl.md)
 
-Other Linux distributions, as well as native **Windows** or **macOS** systems, are also suitable—provided the required software tools are properly installed.
+#### Other setup
+Other Linux distributions, as well as native **Windows** or **macOS** systems, are also suitable—provided the required software tools are properly installed
+
+- **ROOT Installation:**  
+  [ROOT installation](https://www.unibo.it/sitoweb/gabriele.sirri2/contenuti-utili/df5f946d)  
+  _(in English, though not fully up to date)_
+
+- **General Setup Guides** from the course _“Programmazione per la Fisica”_ (Bachelor’s Degree in Physics, University of Bologna):  
+  - [Windows Subsystem for Linux (WSL)](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/WSLGuide.md) _(in Italian)_  
+  - [macOS](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/macOSGuide.md) _(in Italian)_  
+  - [ROOT Framework Installation](https://github.com/Programmazione-per-la-Fisica/howto/tree/main/ROOT-installation) _(in English)_
+
 
 Cloud-based alternatives (non-persistent):  
 - [ROOT on Colab](./howto/root_on_colab.ipynb)  
 - [ROOT on Binder](./howto/root_on_binder.md)
+
+---
+
+## Documentation
+
+### ROOT and Related Resources
+
+- **ROOT Reference Guide:**  
+  [https://root.cern.ch/doc/master/classes.html](https://root.cern.ch/doc/master/classes.html)
+
+- **RooFit User’s Manual:**  
+  [https://root.cern.ch/download/doc/RooFit_Users_Manual_2.91-33.pdf](https://root.cern.ch/download/doc/RooFit_Users_Manual_2.91-33.pdf)
+
+- **RooStats Documentation:**  
+  [https://twiki.cern.ch/twiki/bin/view/RooStats/WebHome](https://twiki.cern.ch/twiki/bin/view/RooStats/WebHome)
+
+### Linux Resources
+
+To get familiar with Linux and the command line, refer to this comprehensive tutorial:  
+- [Ryan’s Linux Tutorial](https://ryanstutorials.net/linuxtutorial/)
+
+**Recommended chapters:**  
+- The Command Line  
+- Basic Navigation  
+- File Manipulation
 
 ---
 
@@ -38,32 +74,3 @@ You can clone the repository using the following `git` command:
 git clone https://github.com/gabriele-sirri/statistical-data-analysis
 ```
 For a brief introduction to Git, refer to this [Git Course](https://github.com/rsreds/git_course) (in Italian).
-
-## Documentation
-
-### RROOT and Related Resources
-
-https://root.cern.ch/doc/master/classes.html
-
-RooFit manual 
-https://root.cern.ch/download/doc/RooFit_Users_Manual_2.91-33.pdf
-
-RooStats documentation
-https://twiki.cern.ch/twiki/bin/view/RooStats/WebHome
-
-### For setting up the platform, as well as for using other operating systems:
-
-*[ROOT installation](https://www.unibo.it/sitoweb/gabriele.sirri2/contenuti-utili/df5f946d) (in English but not completely up to date)
-
-* [guides](https://github.com/Programmazione-per-la-Fisica/howto) developed for the course "Programmazione per la Fisica"(first cycle degree in Fisica, Università di Bologna) are a good reference
-  - [Windows Subsystem for Linux](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/WSLGuide.md) in Italian
-  - [MacOS](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/macOSGuide.md) in Italian
-  
-  - [ROOT framework installation](https://github.com/Programmazione-per-la-Fisica/howto/tree/main/ROOT-installation) (in English)
-
-To familiarize yourself with Linux
-
-* [Linux tutorial](https://ryanstutorials.net/linuxtutorial/) is a comprehensive guide to Linux and Bash written by Ryan Chadwick. Chapters "The Command Line", "Basic Navigation", "File Manipulation" contain critical information.
-
-
-
