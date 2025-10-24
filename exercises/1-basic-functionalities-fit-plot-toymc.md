@@ -13,7 +13,7 @@ https://root.cern/doc/master/group__tutorial__roofit.html
 
 ## Exercise 2021.1 – fit a model to unbinned dataset
 
-Create a Gaussian p.d.f. with mean = 0, and sigma = 1. Change the sigma to 3. Visualize the p.d.f. . Generate an **unbinned** dataset of 10000 events. Make a Fit with Maximum Likelihood. Visualize the results.
+Create a Gaussian p.d.f. with mean = 0, and sigma = 1. Visualize the p.d.f. Change the sigma to 3.  Generate an **unbinned** dataset of 10000 events. Make a Fit with Maximum Likelihood. Visualize the results.
 
 *Tips:*
 \- You can follow the comments inside the macro **roofit\_empty.cpp** 
