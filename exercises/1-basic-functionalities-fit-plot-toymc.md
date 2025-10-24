@@ -13,9 +13,10 @@ https://root.cern/doc/master/group__tutorial__roofit.html
 
 ## Exercise 2021.1 – fit a model to unbinned dataset
 
-Edit the macro **roofit\_empty.cpp** and, following the comments inside, create a Gaussian p.d.f. with mean = 0, and sigma = 1. Change the sigma to 3. Visualize the p.d.f. . Generate an **unbinned** dataset of 10000 events. Make a Fit with Maximum Likelihood. Visualize the results.
+Create a Gaussian p.d.f. with mean = 0, and sigma = 1. Change the sigma to 3. Visualize the p.d.f. . Generate an **unbinned** dataset of 10000 events. Make a Fit with Maximum Likelihood. Visualize the results.
 
 *Tips:*
+\- You can follow the comments inside the macro **roofit\_empty.cpp** 
 
 \- *Use information from the slides shown during the lecture or from RooFit Manual at par 2*
 
@@ -25,9 +26,10 @@ Edit the macro **roofit\_empty.cpp** and, following the comments inside, create 
 
 ## Exercise 2021.2 – fit a model to binned dataset
 
-Edit the macro **roofit_empty.cpp** and, following the comments inside, create an Exponential p.d.f. to with rate = -1/tau where tau = 4.5  is the mean life. Visualize the p.d.f. . Generate a **binned** dataset of 1000 events **(bin width = 0.5)**.  Make a Fit with Maximum Likelihood. Visualize the results.
+Create an Exponential p.d.f. to with rate = -1/tau where tau = 4.5  is the mean life. Visualize the p.d.f. . Generate a **binned** dataset of 1000 events **(bin width = 0.5)**.  Make a Fit with Maximum Likelihood. Visualize the results.
 
 _Tips:_
+\- You can follow the comments inside the macro **roofit\_empty.cpp** 
 
 \- _Define the mean life as a RooRealVar and express the exponential rate using RooFormulaVar_
 
