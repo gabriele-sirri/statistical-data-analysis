@@ -3,7 +3,7 @@
 This repository contains the materials for **Module 3** of the _Statistical Data Analysis for Nuclear and Subnuclear Physics_ course, part of the Master’s Degree in Physics at the University of Bologna.
 
 
-### 📁 Repository Structure
+### Repository Structure
 
 ```bash
 statistical-data-analysis/
@@ -23,7 +23,7 @@ statistical-data-analysis/
 ```
 
 
-### 📚 Table of Contents
+### Table of Contents
 
 - [Course Overview](#course-overview)
   * [Key Topics](#key-topics)
@@ -37,7 +37,7 @@ statistical-data-analysis/
   * [ROOT and Related Resources](#root-and-related-resources)
   * [Linux Resources](#linux-resources)
   * [Further Reading on C++](#further-reading-on-c++)
-  * 
+   
 ---
 
 <!-- toc -->
@@ -71,12 +71,12 @@ The final exam is joint between Modules 1, 2, and 3 and includes:
 2. One practical exercise  
 3. One question based on lab work (e.g., code analysis or commentary)
 
-**Eligibility:** All assignments must be submitted before the exam.---
+**Eligibility:** All assignments must be submitted before the exam.
 
 #### <ins>Teaching Materials</ins>
 
 Available on:
-- **Virtuale (UNIBO)**: slides, tutorials, assignments
+- **Virtuale (UNIBO)**: slides, assignments
 - **GitHub**: installation guides, examples, templates
 
 ---
@@ -111,21 +111,27 @@ Before the lab sessions, please:
   [WSL Setup Guide with ROOT, Jupyter, and VS Code (Ubuntu 24.04)](docs/howto/ROOT_installation.md)
 
 - **Other options**
-  * Native Linux / macOS / Windows setups are also suitable—provided the required software tools are properly installed. 
-    + **General Setup Guides** from the course _“Programmazione per la Fisica”_ (Bachelor’s Degree in Physics, University of Bologna):  
+  * Native Linux / macOS / Windows setups are also suitable
+  <br> provided the required software tools are properly installed. 
+    + **General Setup Guides** from the course 
+    _“Programmazione per la Fisica”_ 
+    (Bachelor’s Degree in Physics, University of Bologna):  
       - [Windows Subsystem for Linux (WSL)](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/WSLGuide.md) _(in Italian)_  
-      - [macOS](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/macOSGuide.md) _(in Italian)_  
-      - [ROOT Framework Installation](https://github.com/Programmazione-per-la-Fisica/howto/tree/main/ROOT-installation) _(in English)
+      - [macOS]
+      (https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/macOSGuide.md) _(in Italian)_  
+      - [ROOT Framework Installation]
+      (https://github.com/Programmazione-per-la-Fisica/howto/tree/main/ROOT-installation) _(in English)
         
     + For Windows 7, 8, 10 (up to build 10511)
-      - [ROOT installation](https://www.unibo.it/sitoweb/gabriele.sirri2/contenuti-utili/df5f946d)  
+      - [ROOT installation]
+      (https://www.unibo.it/sitoweb/gabriele.sirri2/contenuti-utili/df5f946d)  
         _(in English, though not fully up to date)_
   
 - **Cloud-based alternatives**
   * [ROOT on Colab](./docs/howto/root_on_colab.ipynb)  
   * [ROOT on Binder](./docs/howto/root_on_binder.md) (non-persistent)
 
-Testing Your Installation
+#### <ins>Testing Your Installation</ins>
 
 To check that ROOT and its extensions are correctly installed:
 
@@ -141,24 +147,28 @@ t = ROOT.TMVA.TMVAGui()       # Expected error: file TMVA.root does not exist
 
 #### <ins>ROOT and Related Resources</ins>
 
-- **ROOT Reference Guide:**  
-  [https://root.cern.ch/doc/master/classes.html](https://root.cern.ch/doc/master/classes.html)
+#### ROOT
+-   [Main Docs](https://root.cern/doc/master/)    
+-   [Class Reference](https://root.cern/doc/master/classes.html)
 
-- **RooFit User’s Manual:**  
-  [https://root.cern.ch/download/doc/RooFit_Users_Manual_2.91-33.pdf](https://root.cern.ch/download/doc/RooFit_Users_Manual_2.91-33.pdf)
-
-- **RooStats Documentation:**  
-  [https://twiki.cern.ch/twiki/bin/view/RooStats/WebHome](https://twiki.cern.ch/twiki/bin/view/RooStats/WebHome)
-
+#### RooFit
+-   [Manual](https://root.cern/manual/roofit/) 
+-   [Quick Start Guide](https://ph-root-2.cern.ch/d/roofit-20-minutes.html)    
+-   [User Manual PDF](https://root.cern.ch/download/doc/RooFit_Users_Manual_2.91-33.pdf)    
+-   [Tutorials](https://root.cern/doc/master/group__tutorial__roofit.html)
+    
+#### RooStats
+-   [Documentation](https://twiki.cern.ch/twiki/bin/view/RooStats/WebHome)    
+-   [Examples](https://github.com/pellicci/UserCode/tree/master/RooFitStat_class)
+    
 #### <ins>Linux Resources</ins>
 
 To get familiar with Linux and the command line, refer to this comprehensive tutorial:  
 - [Ryan’s Linux Tutorial](https://ryanstutorials.net/linuxtutorial/)
-
-**Recommended chapters:**  
-- The Command Line  
-- Basic Navigation  
-- File Manipulation
+<br>**Recommended chapters:**  
+  * The Command Line  
+  * Basic Navigation  
+  * File Manipulation
 
 #### <ins>Further Reading on C++</ins>
 
