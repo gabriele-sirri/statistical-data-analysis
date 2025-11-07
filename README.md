@@ -94,19 +94,20 @@ Available on:
 Before the lab sessions, please:
 1.  Review the [ROOT Primer](https://root.cern.ch/root/htmldoc/guides/primer/ROOTPrimer.html)
 2.  Read “Introduction” and “Conceptual blocks for modeling” from [Practical Statistics for the LHC](https://arxiv.org/abs/1503.07622)    
-3.  Brush up on C++ fundamentals: namespaces, classes, inheritance, pointers vs references (for C++ users) or refresh Python and Jupyter (if are more on Python than C++)
+3.  Brush up on C++ fundamentals: namespaces, classes, inheritance, pointers vs references (for C++ users) 
+    <br> or refresh Python and Jupyter (if are more on Python than C++)
+
+---
 
 ### Computing Environment
 
-- **Required software:**
-  * ROOT  
-  * Jupyter  
-  * Visual Studio Code (recommended)
+- **Required software**: ROOT, Jupyter, Visual Studio Code (recommended)
 
-- **Reference system:**  
-  * **Linux Ubuntu 24.04 (Windows Subsystem for Linux WSL 2 on Windows)** — same setup as the university lab machines.
-
-  📄 Installation guide:
+- **Reference system:**
+  <br>**Linux Ubuntu 24.04 (Windows Subsystem for Linux WSL 2 on Windows)**
+  <br>same setup as the university lab machines.
+  <br>
+  <br>📄 Installation guide:<br>
   [WSL Setup Guide with ROOT, Jupyter, and VS Code (Ubuntu 24.04)](docs/howto/ROOT_installation.md)
 
 - **Other options**
@@ -118,11 +119,11 @@ Before the lab sessions, please:
         
     + For Windows 7, 8, 10 (up to build 10511)
       - [ROOT installation](https://www.unibo.it/sitoweb/gabriele.sirri2/contenuti-utili/df5f946d)  
-  _(in English, though not fully up to date)_
+        _(in English, though not fully up to date)_
   
 - **Cloud-based alternatives**
-  - [ROOT on Colab](./docs/howto/root_on_colab.ipynb)  
-  - [ROOT on Binder](./docs/howto/root_on_binder.md) (non-persistent)
+  * [ROOT on Colab](./docs/howto/root_on_colab.ipynb)  
+  * [ROOT on Binder](./docs/howto/root_on_binder.md) (non-persistent)
 
 Testing Your Installation
 
