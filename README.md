@@ -13,8 +13,30 @@ This repository contains the materials for **Module 3** of the _Statistical Data
 The module focuses on selected statistical analysis cases in High Energy Physics (HEP), using **RooFit** and **RooStats** as the main tools.
 
 ---
+## 📁 Repository Structure
 
-## Computing Environment
+```bash
+statistical-data-analysis/
+│
+├── data/                 → Real or toy datasets 
+│
+├── docs/                 → Documentation and reference material
+│ ├── howto/              → Practical guides (ROOT installation)
+│ ├── teaching_material/  → Slides
+│ └── references.md
+│
+├── templates/            → Analysis templates or notebook skeletons
+│
+├── exercises/            → Exercises organized by lesson or topic
+│
+└── README.md
+```
+
+## 🚀 Getting Started
+
+### Requirements
+
+### Computing Environment
 
 The reference environment is **Linux Ubuntu 24.04** running on **Windows Subsystem for Linux (WSL) 2**, as used in the laboratory computers.
 
@@ -22,10 +44,10 @@ The essential software components are **ROOT** and **Jupyter**.
 The recommended code editor is **Visual Studio Code**.
 
 **Complete installation guide:**  
-[WSL Setup Guide with ROOT, Jupyter, and VS Code (Ubuntu 24.04)](./howto/root_on_wsl.md)
+[WSL Setup Guide with ROOT, Jupyter, and VS Code (Ubuntu 24.04)](./docs/howto/root_on_wsl.md)
 
 #### Other setup
-Other Linux distributions, as well as native **Windows** or **macOS** systems, are also suitable—provided the required software tools are properly installed
+Other Linux distributions, as well as native **Windows** or **macOS** systems, are also suitable—provided the required software tools are properly installed:
 
 - **ROOT Installation:**  
   [ROOT installation](https://www.unibo.it/sitoweb/gabriele.sirri2/contenuti-utili/df5f946d)  
@@ -36,10 +58,9 @@ Other Linux distributions, as well as native **Windows** or **macOS** systems, a
   - [macOS](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/macOSGuide.md) _(in Italian)_  
   - [ROOT Framework Installation](https://github.com/Programmazione-per-la-Fisica/howto/tree/main/ROOT-installation) _(in English)_
 
-
 Cloud-based alternatives (non-persistent):  
-- [ROOT on Colab](./howto/root_on_colab.ipynb)  
-- [ROOT on Binder](./howto/root_on_binder.md)
+- [ROOT on Colab](./docs/howto/root_on_colab.ipynb)  
+- [ROOT on Binder](./docs/howto/root_on_binder.md)
 
 ---
 
