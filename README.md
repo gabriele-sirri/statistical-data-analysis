@@ -64,6 +64,11 @@ The module focuses on selected statistical analysis cases in High Energy Physics
 - Exercises are perfomed using **PyROOT**  or **C++ code**
 > Submission of all assignments is **mandatory** to access the exam
 
+- **Computer Lab Setup** 
+  <br> You can choose between two options:
+  1.  **Personal Laptop** (with ROOT installed and RooFit/RooStats/TMVA)
+  2.  **Lab workstations** (Windows machines accessible via UNIBO credentials)
+
 #### <ins>Assessment</ins>
 
 The final exam is joint between Modules 1, 2, and 3 and includes:
