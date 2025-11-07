@@ -1,4 +1,4 @@
-# Statistical Data Analysis for Nuclear and Subnuclear Physics - Module 3
+# Statistical Data Analysis for Nuclear and Subnuclear Physics <br> Module 3
 
 This repository contains the materials for **Module 3** of the _Statistical Data Analysis for Nuclear and Subnuclear Physics_ course, part of the Master’s Degree in Physics at the University of Bologna.
 
@@ -31,7 +31,7 @@ statistical-data-analysis/
   * [Assessment](#assessment)
 - [Prerequisites](#prerequisites)
   * [Recommended Skills](#recommended-skills)
-  * [Computer Environment](#computer-environment)
+- [Computer Environment](#computer-environment)
   * [Testing Your Installation](#testing-your-installation)
 - [Documentaion](#documentation)
   * [ROOT and Related Resources](#root-and-related-resources)
@@ -96,7 +96,7 @@ Before the lab sessions, please:
 2.  Read “Introduction” and “Conceptual blocks for modeling” from [Practical Statistics for the LHC](https://arxiv.org/abs/1503.07622)    
 3.  Brush up on C++ fundamentals: namespaces, classes, inheritance, pointers vs references (for C++ users) or refresh Python and Jupyter (if are more on Python than C++)
 
-#### <ins>Computing Environment</ins>
+### Computing Environment
 
 - **Required software:**
   * ROOT  
@@ -109,15 +109,14 @@ Before the lab sessions, please:
   📄 Installation guide:
   [WSL Setup Guide with ROOT, Jupyter, and VS Code (Ubuntu 24.04)](docs/howto/ROOT_installation.md)
 
-
 - **Other options**
   * Native Linux / macOS / Windows setups are also suitable—provided the required software tools are properly installed. 
     + **General Setup Guides** from the course _“Programmazione per la Fisica”_ (Bachelor’s Degree in Physics, University of Bologna):  
       - [Windows Subsystem for Linux (WSL)](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/WSLGuide.md) _(in Italian)_  
       - [macOS](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/macOSGuide.md) _(in Italian)_  
-      - [ROOT Framework Installation](https://github.com/Programmazione-per-la-Fisica/howto/tree/main/ROOT-installation) _(in English)_
-
-    +For Windows
+      - [ROOT Framework Installation](https://github.com/Programmazione-per-la-Fisica/howto/tree/main/ROOT-installation) _(in English)
+        
+    + For Windows 7, 8, 10 (up to build 10511)
       - [ROOT installation](https://www.unibo.it/sitoweb/gabriele.sirri2/contenuti-utili/df5f946d)  
   _(in English, though not fully up to date)_
   
