@@ -1,4 +1,4 @@
-Material available in the (data)[../data] folder:
+Material available in the [data](../data) folder:
 - roofit_empty.cpp an empty macro 
 - roofit_empty.ipynb an empty notebook
 - B0sInvariantMass.root invariant mass spectrum for a B0s meson (from LHCb)
