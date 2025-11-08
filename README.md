@@ -31,6 +31,7 @@ statistical-data-analysis/
   * [Assessment](#assessment)
 - [Prerequisites](#prerequisites)
   * [Recommended Skills](#recommended-skills)
+  * [Preparation Before Laboratory Sessions](#preparation-before-laboratory-sessions)
 - [Computing Environment](#computing-environment)
   * [Testing Your Installation](#testing-your-installation)
 - [Documentation](#documentation)
@@ -88,19 +89,30 @@ Available on:
 
 ### Prerequisites
 
-#### <ins>Recommended Skills</ins>
--   **Statistics**: Basic understanding of terminology and methods 
--   **Programming**:
-    -   C++ (Modern C++)
-    -   Python (for scripting)   
--   **ROOT Framework**: Ability to run C++ macros and manage rootfiles
--   **JUPYTER**: notebooks
+Students enrolling in this course are expected to have familiarity with basic concepts in **statistics** and **programming**, as well as with the **[ROOT Framework](https://root.cern)** for data analysis and visualization.
 
-Before the lab sessions, please:
-1.  Review the [ROOT Primer](https://root.cern.ch/root/htmldoc/guides/primer/ROOTPrimer.html)
-2.  Read “Introduction” and “Conceptual blocks for modeling” from [Practical Statistics for the LHC](https://arxiv.org/abs/1503.07622)    
-3.  Brush up on C++ fundamentals: namespaces, classes, inheritance, pointers vs references (for C++ users) 
-    <br> or refresh Python and Jupyter (if are more on Python than C++)
+#### <ins>Recommended Skills</ins>
+
+Both **C++** and **Python** users are welcome in this course. All students should be comfortable using **ROOT** to load and execute macros or run jupyter notebooks. 
+
+**For C++ Users**
+- Familiarity with **C++** syntax and concepts. **You will not be required to compile code**
+- Ability to run C++ macros within the **ROOT** environment and manage ROOT files.
+
+**For Python Users**
+- Familiarity with **Python** and **Jupyter Notebooks**.  
+- Ability to use **ROOT** via **PyROOT**.
+
+#### <ins>Preparation Before Laboratory Sessions</ins>
+
+Before attending the lab sessions, students are expected to:
+1. Review the **ROOT Primer**.  
+2. Read the following sections from *Practical Statistics for the LHC*:  
+   - *Introduction*  
+   - *Conceptual Blocks for Modeling*  
+3. Refresh their programming fundamentals:
+   - **C++ Users:** namespaces, classes, inheritance, pointers vs. references.  
+   - **Python Users:** Python syntax, Jupyter workflows, and ROOT integration.
 
 ---
 
