@@ -157,12 +157,19 @@ Before attending the lab sessions, students are expected to:
 
 To check that ROOT and its extensions are correctly installed:
 
-```python 
+``` python 
+# python
 import ROOT
-w = ROOT.RooWorkspace()       # Expected output: RooFit v3.xx ...
+w = ROOT.RooWorkspace()       # Expected output: RooFit v3.xx -- Developed by ...
 t = ROOT.TMVA.TMVAGui()       # Expected error: file TMVA.root does not exist
 ```
 
+``` cpp 
+// C++
+$ root
+root [0] RooWorkspace w()      // Expected output: RooFit v3.xx -- Developed by ...
+root [1] TMVA::TMVAGui()       // Expected error: file TMVA.root does not exist
+```
 ---
 
 ### Documentation
