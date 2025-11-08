@@ -114,27 +114,32 @@ Before the lab sessions, please:
   <br>
   <br>📄 Installation guide:<br>
   [WSL Setup Guide with ROOT, Jupyter, and VS Code (Ubuntu 24.04)](docs/howto/ROOT_installation.md)
-
+  <br>
+  
 - **Other options**
-  * Native Linux / macOS / Windows setups are also suitable
+  <br> Native Linux / macOS / Windows setups are also suitable
   <br> provided the required software tools are properly installed. 
-    + **General Setup Guides** from the course 
-    _“Programmazione per la Fisica”_ 
-    (Bachelor’s Degree in Physics, University of Bologna):  
-      - [Windows Subsystem for Linux (WSL)](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/WSLGuide.md) _(in Italian)_  
-      - [macOS]
-      (https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/macOSGuide.md) _(in Italian)_  
-      - [ROOT Framework Installation]
-      (https://github.com/Programmazione-per-la-Fisica/howto/tree/main/ROOT-installation) _(in English)
-        
-    + For Windows 7, 8, 10 (up to build 10511)
-      - [ROOT installation]
-      (https://www.unibo.it/sitoweb/gabriele.sirri2/contenuti-utili/df5f946d)  
-        _(in English, though not fully up to date)_
+  * **General Setup Guides** from the course 
+      _“Programmazione per la Fisica”_ 
+     (Bachelor’s Degree in Physics, University of Bologna):  
+     + [Windows Subsystem for Linux (WSL)](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/WSLGuide.md) _(in Italian)_  
+     + [macOS](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/macOSGuide.md) _(in Italian)_  
+     + [ROOT Framework Installation](https://github.com/Programmazione-per-la-Fisica/howto/tree/main/ROOT-installation)  
+  * for Windows 7, 8, 10 (up to build 10511)
+     + [ROOT installation](https://www.unibo.it/sitoweb/gabriele.sirri2/contenuti-utili/df5f946d)  
   
 - **Cloud-based alternatives**
-  * [ROOT on Colab](./docs/howto/root_on_colab.ipynb)  
-  * [ROOT on Binder](./docs/howto/root_on_binder.md) (non-persistent)
+  <br> If you can't install ROOT locally, you can use one of the following cloud-based environments to run ROOT and notebooks directly in your browser.
+  * **ROOT on Colab**
+    <br>Run ROOT interactively on **Google Colab**, 
+    with optional persistent storage through your Google Drive or github. 
+    Sessions are **time-limited** (typically up to 12 hours) and may disconnect after periods of inactivity.
+    + [ROOT on Colab](./docs/howto/root_on_colab.ipynb)
+  * **ROOT on Binder**
+    <br>Launch ROOT notebooks in a **temporary Binder environment** without any local setup.  
+    No account or installation is required, but all work is **non-persistent** 
+    (data is lost after the session ends unless you **manually download or export your notebooks**).   
+    + [ROOT on Binder](./docs/howto/root_on_binder.md)
 
 #### <ins>Testing Your Installation</ins>
 
