@@ -16,11 +16,9 @@ https://root.cern/doc/master/group__tutorial__roofit.html
 Create a Gaussian p.d.f. with mean = 0, and sigma = 1. Visualize the p.d.f. Change the sigma to 3.  Generate an **unbinned** dataset of 10000 events. Make a Fit with Maximum Likelihood. Visualize the results.
 
 *Tips:*
-\- You can follow the comments inside the macro **roofit\_empty.cpp** 
-
-\- *Use information from the slides shown during the lecture or from RooFit Manual at par 2*
-
-\- *Refer to the tutorial rf101\_basics.cxx*
+<br>\- You can follow the comments inside the macro **roofit\_empty.cpp** or **roofit_empty.ipynb**
+<br>\- *Use information from the slides shown during the lecture or from RooFit Manual at par 2*
+<br>\- *Refer to the tutorial rf101\_basics.cxx*
 
 ---
 
@@ -29,11 +27,9 @@ Create a Gaussian p.d.f. with mean = 0, and sigma = 1. Visualize the p.d.f. Chan
 Create an Exponential p.d.f. to with rate = -1/tau where tau = 4.5  is the mean life. Visualize the p.d.f. . Generate a **binned** dataset of 1000 events **(bin width = 0.5)**.  Make a Fit with Maximum Likelihood. Visualize the results.
 
 _Tips:_
-\- You can follow the comments inside the macro **roofit\_empty.cpp** 
-
-\- _Define the mean life as a RooRealVar and express the exponential rate using RooFormulaVar_
-
-\- _The binning of the returned RooDataHist is controlled by the default binning associated with the observables generated. To set the number of bins in x to 200, do e.g. x.setBins(200) prior to the call to generateBinned()_
+<br>\- You can follow the comments inside the macro **roofit\_empty.cpp** or **roofit_empty.ipynb** 
+<br>\- _Define the mean life as a RooRealVar and express the exponential rate using RooFormulaVar_
+<br>\- _The binning of the returned RooDataHist is controlled by the default binning associated with the observables generated. To set the number of bins in x to 200, do e.g. x.setBins(200) prior to the call to generateBinned()_
 
 
 ---
@@ -51,7 +47,11 @@ In “B0sInvariantMass.root” an example of invariant mass spectrum for a B0s m
 
 Create a macro to open the “B0sInvariantMass.root” and import the corresponding binned dataset. Using RooFit factory and RooWorkspace, create a Breit-Wigner model. Fit the model to the binned dataset. Create a Gaussian function and fit to the data. Finally plot the data, and the BW and Gaussian distribution to the same canvas.
 
-_Tips: define the RooRealVar out of the factory, read and import the data from the file and import in the workspace using RooWorkspace::import(…). Compare the fitted value with the particle mass reported in the Particle Data Group. You can see how to import data here:_ [https://root.cern.ch/doc/master/rf102\_\_dataimport_8C.html](https://root.cern.ch/doc/master/rf102__dataimport_8C.html)
+_Tips: 
+<br>\- define the RooRealVar out of the factory, 
+<br>\- read and import the data from the file and import in the workspace using RooWorkspace::import(…). 
+You can see how to import data here:_ [https://root.cern.ch/doc/master/rf102\_\_dataimport_8C.html](https://root.cern.ch/doc/master/rf102__dataimport_8C.html)
+<br>\- Compare the fitted value with the particle mass reported in the Particle Data Group. 
 
 ---
 
@@ -79,24 +79,20 @@ Then, create a Gaussian p.d.f. for $x_{sum}$ with mean and sigma as calculated b
 Make a Fit with Maximum Likelihood. Visualize the results.
 
 _Tips:_
-
-\- the product of random variable is distributed according a p.d.f. which is the product of the single p.d.f.s  (use  RooProdPdf)
-
-\- the variable “sum of random variable” can be defined in RooFit by adding a formula to the generated dataset, as shown in this example for 2 variables:
-
+<br>\- _the product of random variable is distributed according a p.d.f. which is the product of the single p.d.f.s  (use  `RooProdPdf`)_
+<br>\- _the variable “sum of random variable” can be defined in RooFit by adding a formula to the generated dataset, as shown in this example for 2 variables:_
+``` cpp
 // Construct formula to calculate the sum events
-
 RooFormulaVar fsum{"fsum", "var1+var2 ", RooArgList{var1, var2} ;
-
 // Add column with variable xsum to previously generated dataset
-
-auto xsum = static_cast<RooRealVar\*>(data->addColumn(fsum));_\-_ define a Gaussian model for xsum (sum of variables). With this respect, xsum behaves exactly as any other RooRealVar, even defined using  RooFormulaVar.
-
-\- Range and binning are property of a RooRealVar. Given that xsum is defined using a RooFormulaVar and not with the RooRealVar class constructor, you have to explicitly specify a range and a binning to obtain a frame from xsum
-
+auto xsum = static_cast<RooRealVar\*>(data->addColumn(fsum));
+```
+\- _define a Gaussian model for xsum (sum of variables). With this respect, xsum behaves exactly as any other `RooRealVar`, even defined using  `RooFormulaVar`._
+<br>\- _Range and binning are property of a `RooRealVar`. Given that xsum is defined using a `RooFormulaVar` and not with the `RooRealVar` class constructor, you have to explicitly specify a range and a binning to obtain a frame from `xsum`_
+``` cpp
 auto plot = xsum->frame(Bins(40), Title("Sum of Random variables"), Range(0., 6.));
-
-_\-_ Don’t’ forget to adjust the range...
+```
+<br>\- _Don’t’ forget to adjust the range..._
 
 ---
 
