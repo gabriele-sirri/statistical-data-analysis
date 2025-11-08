@@ -31,12 +31,12 @@ statistical-data-analysis/
   * [Assessment](#assessment)
 - [Prerequisites](#prerequisites)
   * [Recommended Skills](#recommended-skills)
-- [Computer Environment](#computer-environment)
+- [Computing Environment](#computing-environment)
   * [Testing Your Installation](#testing-your-installation)
-- [Documentaion](#documentation)
+- [Documentation](#documentation)
   * [ROOT and Related Resources](#root-and-related-resources)
   * [Linux Resources](#linux-resources)
-  * [Further Reading on C++](#further-reading-on-c++)
+  * [Further Reading on C++](#further-reading-on-c)
    
 ---
 
