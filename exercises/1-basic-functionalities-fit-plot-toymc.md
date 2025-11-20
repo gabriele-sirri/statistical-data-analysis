@@ -5,7 +5,7 @@ Material available in the [data](../data) folder:
 
 # [0] WARM UP 
 
-Download and run the tutorial rf101, rf201, and rf202
+Download and run tutorials rf101, rf201, and rf202
 https://root.cern/doc/master/group__tutorial__roofit.html
 
 --

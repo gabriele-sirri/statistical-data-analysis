@@ -33,19 +33,20 @@ with the following properties:
 ### Procedure
 
 1. **Generate a Dataset** 
-  <br> Generate an unbinned dataset of 1000 events from the model.
+  <br> Generate an unbinned dataset `data` of 1000 events from the model.
 2. **Save the Workspace** 
   <br> Store both the model and the generated dataset in a ROOT file using a RooWorkspace.
 3. **Minimize the Likelihood**
   <br>Using the commands illustrated in the lecture as a reference:
-    * Construct the unbinned negative log-likelihood (NLL) of the model with respect to the generated dataset using `RooAbsPdf::createNLL(RooAbsData&)`. The returned object is a ``RooAbsReal*``.
-    * Create a MINUIT interface using a `RooMinizer`(or `RooMinuit`) in older versions). <br> Pass the NLL object to the constructor.
+    * Construct the unbinned negative log-likelihood (NLL) of the model with respect to the generated dataset using `auto nll = model.createNLL(data);`. The returned object is a `RooAbsReal*`.
+    * Create a MINUIT interface `minuit` using a `RooMinizer`(or `RooMinuit`) in older versions. <br> Pass the `nll` object to the constructor.
     * Enable verbose mode to display MINUIT’s internal steps using
-`RooMinuit::setVerbose(kTRUE)`).
+`minuit.setVerbose(kTRUE);`.
     * Run **MIGRAD** to perform likelihood minimization.
-    * Print the values of the parameters `f`, `mean` , `s1`, and `s2` using
-`RooRealVar::Print()`.
+    * Print the values of all parameters `f`, `mean` , `s1`, and `s2` using
+`f.Print()`, ... .
     <br> These values now reflect the MIGRAD optimization.
+
 
 4. **HESSE Error Calculation**
     * Disable verbose mode.
@@ -60,7 +61,7 @@ with the following properties:
 
 6. **Save the Results**
    * Save the fit results:
-   * Save a snapshot of the fit result using `RooMinuit::save()`.
+   * Save a snapshot of the fit result using `minuit.save()`.
    <br> This returns a `RooFitResult*`.
    * Print the result in verbose mode using `Print("v")`.
    <br> The snapshot contains:
@@ -148,12 +149,15 @@ where
 
 Create a PDF describing the energy spectrum and how the spectrum is altered by neutrino oscillations.
 
-- **Load the non-oscillated Monte-Carlo sample**
+- **1. Load the non-oscillated Monte-Carlo sample**
   <br> Load _minos_2013_mc.dat_ into a `RooDataSet` named `mc_noosc`.
-  <br>(_hints: as done before for the observed data_)
-- **Turn this non-oscillated sample into a histogram-based function**
+  <br>
+    > as done before for the observed data
+
+- **2. Turn this MC sample into a histogram-based function**
   <br> This function represents the shape of the energy distribution for non-oscillated neutrinos.
-  > An **histogram-based** function is represented in RooFit by the `RooHistFunc` class. Use the method `binnedClone()` to create a `RooDataHist` from the RooDataSet and then create a `RooHistFunc` object from the `RooDataHist`.
+    <br>
+    > An **histogram-based** function is represented in RooFit by the `RooHistFunc` class. Use the method `binnedClone()` to create a `RooDataHist` from the RooDataSet and then create a `RooHistFunc` object from the `RooDataHist`.
 
 ```cpp
 RooDataSet* dd = (RooDataSet*) mc_noosc.reduce(RooArgSet(e)) ;
@@ -161,74 +165,89 @@ RooDataHist* dh_mc_noosc = dd->binnedClone();
 RooHistFunc func_noosc { "func_mc_noosc", "No oscillation", e, *dh_mc_noosc, 2 };
 ```
 
+- **3 Construct the oscillation probability function**
+ <br>According to Eq. (1), the oscillation probability depends on mixing $\sin^2(2\theta)$, mass splitting $\Delta m^2$, neutrino energy $E$ (the observable) and distance $𝐿=730$ km (a constant).
+  * create parameters:
+    - `mixing` $= \sin^2(2\theta)$
+    - `dm2` $= \Delta m^2$
+  * use a `RooFormulaVar` to evaluate Eq. (1).
 
-- The shape of the energy distribution for oscillated neutrinos is
-obtained by multiplying this function by the oscillation probability
-shown in \[Eq. 1\] . The oscillation probability depends on mixing
-sin22𝜃, mass splitting Δ𝑚2, neutrino energy (observable) and distance
-𝐿=730 km (constant).\
-o Create the variables mixing (i.e. sin22𝜃 as a whole) and dm2
-(i.e. Δ𝑚2).
+- **4. Build the final model**
+<br>The shape of the energy distribution for oscillated neutrinos is
+obtained by modulating the non-oscillated spectrum this function by the oscillation probability
+<br> Use a `RooGenericPdf`.
+    <br> 
+    > Normalization is automatically handled by RooFit.
 
-o Create a RooFormulaVar to evaluate the oscillation probability
-expressed by the \[Eq. 1\]\
-o Create the final p.d.f of the energy distribution of oscillated
-neutrino using a RooGenericPdf\
-Hint: model = RooGenericPdf{ "model", "model", "@0\*@1",\
+```cpp
+model = RooGenericPdf{ "model", "model", "@0 * @1",\
 RooArgSet(prob_osc, func_noosc) };\
 o Don't care about normalization. RooFit will adjust it for you.\
-Now you can fit the model to the data. Plot data and model. Save the
-plot as minos_data.png.
+```
 
-PART 2:\
-You shall minimize the likelihood explicity by hand using a RooMinuit
-object (look to the slides\
-- Construct a function object representing the negative log likelihood o
-f the model with respect to the data . Hint: use
-RooAbsPdf::createNLL(RooAbsData&), the returned object is a
-RooAbsReal\*\
-- Create a MINUIT interface object (RooMinuit)\
-- Activate verbose logging of MINUIT parameter space stepping\
-Hint: RooMinut::setVerbose(kTRUE)\
-- Call MIGRAD to minimize the likelihood\
-- Print values (use: RooRealVar::Print() ) of all parameters (dm2,
-mixing), that reflect values (and error estimates) that are back
-propagated from MINUIT as evaluated by MIGRAD \[A\]\
-- Disable verbose logging\
-- Run HESSE to calculate errors from the second derivative at maximum\
-- Print values of all parameters (dm2, mixing), that reflect values (and
-error estimates) that are back propagated from MINUIT as evaluated by
-HESSE \[B\] - Run MINOS on dm2 parameter only\
-- Print value of dm2 parameter , that reflect value (and error
-estimates) that are back propagated from MINUIT as evaluated by MINOS
-(the algorithm) \[C\]. Please note that the error estimates is not
-symmetric.\
-Saving result s. - Save a snapshot of the fit result. This object
-contains the initial fit parameters, the final fit parameters, the
-complete correlation matrix, the EDM, the minimized FCN , the last
-MINUIT status code and the number of times the RooFit function object
-has indicated evaluation problems (e.g. zero probabilities during
-likelihood evaluation) . Hint: use RooMinuit::save() ; the returned
-value is a RooFitResult\* type. Then, call Print("v") . \[D\]\
-Contour plot.\
-- Make contour plot of dm2 vs mixing at 1,2,3 sigma\
-Hint: use RooMinuit::contour(var1, var2, n1, n2, n3 ); the returned
-value is a RooPlot\* frame;\
-plot the frame using the method Draw(..) as usual
+- **5. Fit and plot**
+<br> Fit the model to the data and save the plot as **minos_data.png**.
 
-NOTE: Contours can be drawn using the arguments n1 , n2, 3 to request
-the desired coverage in units of 𝜎 = 1, 2, 3 (see RooMinimize r::co
-ntour() ). The minimizer automatically adjust s these values based on
-: - Coverage : Values are ta ken from the column (M = 2) of Table 40.2
-in the PDG Review :
-https://pdg.lbl.gov/2024/web/viewer.html?file=../reviews/rpp2024
--rev-statistics.pdf\
-- Statistical scale : This considers whether the function to be
-minimized is a Chi² or a Negative Log - Likelihood (see RooMinim
-izer:SetErrorDef() )
+#### PART 2 - Likelihood Minimization with RooMinizer
 
--   Zoom (by hand) the plot axes to better visualize the countour.\
-    Save the plot as minos_likelihood .png\
-    (submit source code, minos_data.png, minos_likelihood.png and a text
-    file with the fit results obtained in \[A\], \[B\], \[C\], and \[D\]
-    )
+<mark>Note: RooMinuit has been replaced by RooMinimizer starting from ROOT v6.30</mark>
+
+
+Using the commands illustrated in the lecture as a reference, you will now minimize the likelihood explicitly using a RooMinuit (or RooMinimizer) object.
+
+**Minimize the Likelihood**
+- Construct the unbinned negative log-likelihood (NLL) of the model with respect to the generated dataset using `auto nll = model.createNLL(data);`. The returned object is a `RooAbsReal*`.
+
+- Create a MINUIT interface `minuit` using a RooMinizer (or RooMinuit in older versions). <br> Pass the `nll` object to the constructor.
+
+- Enable verbose mode to display MINUIT’s internal steps using
+`minuit.setVerbose(kTRUE);`.
+
+- Run **MIGRAD** to perform likelihood minimization.
+
+- Print the values of the parameters `mixing`, `dm2` using `f.Print()`, `dm2.Print()`
+    <br> These values now reflect the MIGRAD optimization.
+
+**HESSE Error Calculation**
+- Disable verbose mode.
+- Run **HESSE**, which computes errors using the second derivatives of the NLL at the minimum.
+- Print the updated parameter values
+    <br> These now contain the HESSE error estimates.
+
+**MINOS Error Calculation for `dm2`**
+- Run **MINOS** for parameter `dm2` 
+- Print the parameter values again.
+   <br> Note that the uncertainties for `dm2` are now **asymmetric**. 
+
+**Save Results**
+   * Save the fit results:
+   * Save a snapshot of the fit result using `minuit.save()`.
+   <br> This returns a `RooFitResult*`.
+   * Print the result in verbose mode using `Print("v")`.
+   <br> The snapshot contains:
+     - initial and final parameter values
+     - correlation matrix
+     - EDM value
+     - FCN value
+     - MINUIT status code
+     - number of computational issues encountered (e.g., null probability during likelihood evaluation).
+
+
+**Contour plot**
+* Produce a contour plot of `dm2` vs `mixing` corresponding to the confidence levels of **68**%, **95.45**%, **99.73**%, using
+    <br><br>
+    `RooMinimizer::contour(var1, var2, n1, n2, n3)`
+    <br><br>
+    where the arguments `n1` , `n2`, and `n3` specify the desired coverange in units of $𝜎$ (in this case 1, 2, and 3). 
+    The object returned by this function is a plot frame of type `RooPlot*`.
+    <br><br>
+    _NOTE_:  The minimizer automatically converts these $\sigma$-levels into the appropriate $\Delta\mathrm{NLL}$ thresholds, according to:
+      - **Coverage** values taken from Table 40.2 (column $M = 2$) of the [PDG Statistics Review](https://pdg.lbl.gov/2024/web/viewer.html?file=../reviews/rpp2024-rev-statistics.pdf)
+      - **Statistical scale**, depending on whether the minimized function is a chi-square or a negative log-likelihood, (see [RooMinimizer:SetErrorDef()](https://root.cern.ch/doc/master/classROOT_1_1Math_1_1Minimizer.html#aa4e46f31bb8dfb770fcb704e585a3593))
+    
+      For a detailed description, see the documentation of
+      [RooMinimizer::contour()](https://root.cern.ch/doc/master/classRooMinimizer.html#a34df2f70f63b5644507df0e056077c51) ).
+    * Draw the resulting contour frame using `RooPlot::Draw()` and save it
+    to a file.
+
+-  Zoom the axes manually to improve visibility.
