@@ -1,7 +1,9 @@
+Templates available in the [templates](../templates) folder:
+- **roofit_empty.cpp** - an empty macro 
+- **roofit_empty.ipynb** - an empty notebook
+
 Material available in the [data](../data) folder:
-- roofit_empty.cpp an empty macro 
-- roofit_empty.ipynb an empty notebook
-- B0sInvariantMass.root invariant mass spectrum for a B0s meson (from LHCb)
+- **b0_invariant_mass.root** - invariant mass spectrum for a B0s meson (from LHCb)
 
 # [0] WARM UP 
 
