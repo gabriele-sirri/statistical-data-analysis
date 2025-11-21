@@ -1,7 +1,11 @@
-Material available in the [data](../data) folder:
-- roofit_empty.cpp an empty macro 
-- roofit_empty.ipynb an empty notebook
+Templates available in the [templates](../templates) folder:
+- `roofit_empty.cpp` - an empty macro 
+- `roofit_empty.ipynb` - an empty notebook
 
+Material available in the [data](../data) folder:
+- `rarest_b0_decay.dat` - dataset collected by a B-meson experiment
+
+  
 # [0] WARM UP
 
 Download and run tutorials rf502, rf503 (RooWorkspace), rf511
