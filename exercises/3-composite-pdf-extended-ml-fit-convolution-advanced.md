@@ -1,7 +1,6 @@
 Material available in the [data](../data) folder:
-- roofit_empty.cpp an empty macro 
-- roofit_empty.ipynb an empty notebook
-
+- `minos_2013_data.dat` - unbinned dataset of observed events 
+- `minos_2013_mc.dat` - unbinned Monte Carlo dataset for non-oscillated neutrinos 
 
 # [0] WARM UP
 
@@ -134,8 +133,8 @@ where
 ### Procedure
 
 **Download:**
-- **minos_2013_data.dat** - unbinned dataset of observed events 
-- **minos_2013_mc.dat** - unbinned Monte Carlo dataset for non-oscillated neutrinos 
+- `minos_2013_data.dat` - unbinned dataset of observed events 
+- `minos_2013_mc.dat` - unbinned Monte Carlo dataset for non-oscillated neutrinos 
 
 **Define the *observable*:** 
 <br> The reconstructed neutrino energy $E$,  as a `RooRealVar` ranging from 0.5 to 14 GeV. 
