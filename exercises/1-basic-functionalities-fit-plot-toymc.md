@@ -50,20 +50,18 @@ In “B0sInvariantMass.root” an example of invariant mass spectrum for a B0s m
 Create a macro to open the “B0sInvariantMass.root” and import the corresponding binned dataset. Using RooFit factory and RooWorkspace, create a Breit-Wigner model. Fit the model to the binned dataset. Create a Gaussian function and fit to the data. Finally plot the data, and the BW and Gaussian distribution to the same canvas.
 
 _Tips: 
-<br>\- read and import the data from the file 
+<br>\- open the rootfile, get the istogram and import the data into RooDataHist 
 You can see how to import data here:_ [https://root.cern.ch/doc/master/rf102\_\_dataimport_8C.html](https://root.cern.ch/doc/master/rf102__dataimport_8C.html)
 
-'''
-// Read data from input stream. The variables of the dataset need to be supplied
-   // to the RooDataSet::read() function.
-   std::cout << "\n-----------------------\nReading data from ASCII\n";
-   RooDataSet *dataReadBack =
-      RooDataSet::read("rf102_testData.txt",
-                       RooArgList(x, y), // variables to be read. If the file has more fields, these are ignored.
-                       "D"); // Prints if a RooFit message stream listens for debug messages. Use Q for quiet.
- 
-   dataReadBack->Print("V");
-'''
+```cpp
+   RooRealVar x("x", "x", -10, 10);               // 1. Declare observable x
+
+   auto f = TFile::Open("filename.root")          // 2. Open the ROOT file
+   auto hh = static_cast<TH1*> g->Get("massaB0"); // 3. Get the ROOT TH1 histogram
+
+   RooDataHist dh("dh", "dh", x, Import(*hh));    // 4. Create a binned dataset that imports contents
+                                                  // of TH1 and associates its contents to observable 'x'
+```
 
 <br>\- Compare the fitted value with the particle mass reported in the Particle Data Group. 
 
