@@ -10,7 +10,7 @@ https://root.cern/doc/master/group__tutorial__roofit.html
 
 --
 
-# [1] Hands -on: RooWorkspace, Factory , Composite Model; Working with Likelihoods
+# [1] Hands -on: Composite Model; Working with Likelihoods
 
 ## Exercise 11 - Composite Model; Working with Likelihoods
 
