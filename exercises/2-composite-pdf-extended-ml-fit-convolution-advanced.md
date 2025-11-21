@@ -13,64 +13,81 @@ https://root.cern/doc/master/group__tutorial__roofit.html
 # [1] Hands-on: RooWorkspace, Factory, Composite Model, one-dimensional numeric convolution (ADVANCED)
 
 ## Exercise A - LHCb: First Observation of the Rare Decay $ B^0 \to p\bar{p} $
-
+**Topics: 
+composite model; pull; residuals; fit instability**
 
 
 _Inspired by Figure 1 in:  
-**“First observation of the rare purely baryonic decay \(B^0 \to p\bar{p}\)”**,  
+**First observation of the rare purely baryonic decay $B^0 \to p\bar{p}$**,  
 [arXiv:1709.01156v2 \[hep -ex\] 6 Dec 2017](
-https://arxiv.org/abs/1709.01156)_
+https://arxiv.org/abs/1709.01156)\
+See also [https://cerncourier.com/a/the-rarest-b0-decay-ever-observed/](https://cerncourier.com/a/the-rarest-b0-decay-ever-observed/)_
 
-See also https://cerncourier.com/a/the -rarest -b0-decay -ever
--observed/\
-In 2017 the LHCb collaboration has observed the rare baryonic decay 𝐵0→𝑝
-𝑝̅. The branching fraction was measured at the level of about 1.3 per 100
-million decays, which makes this decay mode the rarest decay of a B0
-meson ever observed. It is also the rarest observed hadronic decay of
+<img src="image-3.png" alt="alt text" width="250"/>
+
+In 2017 the LHCb collaboration has observed the rare baryonic decay $B^0 \to p\bar{p}$. The branching fraction was measured at the level of about 1.3 per 100 million decays, which makes this decay mode the rarest decay of a $B^0$ meson ever observed. It is also the rarest observed hadronic decay of
 all beauty mesons.\
-The search for the rare decays 𝐵0→𝑝 𝑝̅ and 𝐵𝑠0→𝑝 𝑝̅ had previously been
-performed by LHCb with the full 3 fb --1 data sample collected during
-the first run of the LHC. An excess of 𝐵0→𝑝 𝑝̅ candidates with respect to
-the background - only hypothesis is observed with a statistical
-significance of 5.3 standard deviations. The hint of a 𝐵𝑠0→𝑝 𝑝̅ signal
-reported in 2013 is, however, not confirmed, and an upper limit for the
-corresponding branching fraction has been set. The measured 𝐵0→𝑝 𝑝̅ and
-𝐵𝑠0→𝑝 𝑝̅ branching fractions are compatible with the latest theoretical
-calculations\
+The search for the rare decays $B^0 \to p\bar{p}$ and $B_S^0 \to p\bar{p}$ had previously been
+performed by LHCb with the full 3 fb--1 data sample collected during
+the first run of the LHC. An excess of $B^0 \to p\bar{p}$ candidates with respect to the background - only hypothesis is observed with a statistical
+significance of 5.3 standard deviations. The hint of a $B_S^0 \to p\bar{p}$ signal
+reported in 2013 is, however, not confirmed, and an upper limit for the corresponding branching fraction has been set. The measured $B^0 \to p\bar{p}$ and
+$B_S^0 \to p\bar{p}$ branching fractions are compatible with the latest theoretical
+calculations
+
 The exercise aims to reproduce the Invariant Mass Distribution Figure 1
 
-Download\
-rarest_b0_decay.dat dataset collected by a B -meson experiment\
-Load the unbinned dataset from the file rarest_b0_decay.dat\
-Tip: RooDataSet data = \*RooDataSet::read("rarest_b0_decay.dat", x,
-"v");\
-Using RooFit, define an extended composite model for invariant mass.\
-The model components are:\
-i) a background (you're free to choose the model: flat, polynomial,
-exponential, ...);\
-ii) a Gaussian peak around the 𝐵0 mass,\
-iii) a Gaussian peak around the 𝐵𝑠0 mass\
-Fit the model to the data using a maximum likelihood fit. Plot data and
-model. Superimpose each single component with different color\
-Tip: use the named functions RooFit::Components(...) and
-RooFit::LineColor(...).\
-Make histogram of residual and pull distributions\
-Have a look to
-https://root.cern.ch/doc/master/rf109\_\_chi2residpull_8C.html\
-Note: methods residHist(...) and pull(..) by default compute the
-residuals (pulls) of the latest -plotted histogram with respect to the
-latest -plotted curve.\
--\> Construct a histogram with the residuals of the data w.r.t. the
-curve\
--\> Construct a histogram with the pulls of the data w.r.t the curve\
--\> Create a new frame to draw the residual distribution and add the
-distribution to the frame\
--\> Create a new frame to draw the pull distribution and add the
-distribution to the frame\
-(submit source code, plots)
+### Instructions
 
-ARIADNE Liquid Argon Time Projection Chamber\
+#### 1. Download
+- `rarest_b0_decay.dat` - dataset collected by a B-meson experiment
+
+#### 2. Load the **unbinned dataset**:
+   ```cpp
+   RooDataSet data = *RooDataSet::read("rarest_b0_decay.dat", x, "v");
+   ```
+   
+#### 3. Using RooFit, define an **extended composite model** for invariant mass with:
+  - a background component (your choice: flat, polynomial, exponential, ...)
+  - a Gaussian peak around the $B^0$ mass
+  - a Guassian peak around the $B_S^0$ mass
+  
+#### 4. Fit the model using Maximum Likelihood
+
+#### 5. Plot data and model; superimpose components with different colors.
+  - use the named functions `RooFit::Components(...)` 
+  - use the named functions `RooFit::LineColor(...)`
+
+#### 6. Create histograms of residuals and pulls.
+  - Refer to:
+  <br> [https://root.cern.ch/doc/master/rf109__chi2residpull_8C.html](https://root.cern.ch/doc/master/rf109__chi2residpull_8C.html)
+
+> Note: methods `residHist(...)` and `pull(..)` by default compute residuals and pulls of the latest-plotted histogram with respect to the latest-plotted curve. The correct procedure is
+>  - Construct a histogram with the residuals of the data w.r.t. the curve
+>  - Construct a histogram with the pulls of the data w.r.t the curve
+>  - Create a new frame to draw the residual distribution and add the distribution to the frame
+>  - Create a new frame to draw the pull distribution and add the distribution to the frame
+
+
+<!--
+
+
+In 2017, the LHCb Collaboration observed the rare baryonic decay \( B^0 \to p\bar{p} \).  
+The branching fraction is about **1.3  10^-8**, making it the rarest observed hadronic decay of any beauty meson.
+
+
+Exercise ARIADNE Liquid Argon Time Projection Chamber
+
+
 composite model, Convolution\
+
+
+Inspired by Figures 6 and 12 of:
+Optical Readout of the ARIADNE LArTPC Using a Timepix3-Based Camera.
+
+The ARIADNE experiment is a 1-ton dual-phase LArTPC used for R&D in future liquid-argon neutrino detectors.
+
+
 Inspired by Figure 6 (right) "The negative gradient of the summed ToT
 distribution." and by Figure 12 "The distribution of the lifetime
 -corrected ToT summation for a population of through -going muon
@@ -79,6 +96,7 @@ of "Optical Readout of the ARIADNE LArTPC Using a Timepix3 -Based
 Camera"\
 Instruments 2020, 4(4), 35; https://doi.org/10.3390/instruments4040035\
 https://www.mdpi.com/2410 -390X/4/4/35#\
+
 Future Liquid Argon Time Projection Chambers in the neutrino sector will
 be able to reach the kiloton -scale ---for example, four 17,000 ton
 LArTPCs have been proposed for use on the DUNE project. Given the high
