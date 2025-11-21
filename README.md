@@ -125,7 +125,7 @@ Before attending the lab sessions, students are expected to:
   <br>same setup as the university lab machines.
   <br>
   <br>📄 Installation guide:<br>
-  [WSL Setup Guide with ROOT, Jupyter, and VS Code (Ubuntu 24.04)](docs/howto/ROOT_installation.md)
+  [WSL Setup Guide with ROOT, Jupyter, and VS Code (Ubuntu 24.04)](docs/howto/root_on_wsl.md)
   <br>
   
 - **Other options**
