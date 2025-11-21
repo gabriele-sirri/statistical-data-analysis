@@ -1,7 +1,8 @@
-Material available in the [data](../data) folder:
-- roofit_empty.cpp an empty macro 
-- roofit_empty.ipynb an empty notebook
+Templates available in the [templates](../templates) folder:
+- `roofit_empty.cpp` - an empty macro 
+- `roofit_empty.ipynb` - an empty notebook
 
+  
 # [0] WARM UP
 
 Download and run tutorials rf502, rf503 (RooWorkspace), rf511
