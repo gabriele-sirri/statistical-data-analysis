@@ -55,23 +55,28 @@ libxxhash-dev liblz4-dev -y
 sudo apt install libgsl0-dev -y
 ```
 
-#### 3️⃣ Download and Set Up ROOT
+#### 3️⃣ Download and Extract ROOT
 
-note choose the download file according to the actual Linux distribution 
+Choose the correct ROOT binary for your Linux distribution, then run:
 
 ```bash
-
-
 cd $HOME
 wget https://root.cern/download/root_v6.36.04.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz
 tar -xzvf root_v6.36.04.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz
+```
+
+#### 4️⃣ Set Up the ROOT Environment
+
+Add ROOT to your shell startup file, e.g. using the commands below: 
+
+```bash
 echo >> ~/.bashrc
 echo "source \$HOME/root/bin/thisroot.sh" >> ~/.bashrc
 cat ~/.bashrc
 exit
 ```
 
-#### 4️⃣ Verify Installation
+#### 5️⃣ Verify Installation
 ```bash
 wsl
 cd $HOME
