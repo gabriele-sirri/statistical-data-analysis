@@ -8,12 +8,13 @@ This repository contains the materials for **Module 3** of the _Statistical Data
 ```bash
 statistical-data-analysis/
 │
-├── data/                 → Real or toy datasets 
+├── classes/              → live coding done during the classes
+│ 
+├── data/                 → Real or toy datasets for exercises
 │
 ├── docs/                 → Documentation and reference material
 │ ├── howto/              → Practical guides (ROOT installation)
-│ ├── teaching_material/  → Slides
-│ └── references.md
+│ └── teaching_material/  → Slides
 │
 ├── templates/            → Analysis templates or notebook skeletons
 │
