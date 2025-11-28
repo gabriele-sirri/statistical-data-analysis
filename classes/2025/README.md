@@ -1,4 +1,4 @@
-# program of the course
+# Program of the Course
 
 course: Statistical Data Analysis for Nuclear and Subnuclear Physics
 module: Module 3 (hands-on)
