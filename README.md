@@ -1,5 +1,7 @@
 # Statistical Data Analysis for Nuclear and Subnuclear Physics <br> Module 3
 
+<mark style="background: #00ced1!important>📄 [Course Program and live sessions A.Y 2025/2025](classes/2025/)
+
 This repository contains the materials for **Module 3** of the _Statistical Data Analysis for Nuclear and Subnuclear Physics_ course, part of the Master’s Degree in Physics at the University of Bologna.
 
 
@@ -8,19 +10,18 @@ This repository contains the materials for **Module 3** of the _Statistical Data
 ```bash
 statistical-data-analysis/
 │
-├── classes/              → live coding done during the classes
+├── classes/              → Live coding sessions from the classes
+│ └── 2025/               → Materials for the 2025/26 academic year
 │ 
-├── data/                 → Real or toy datasets for exercises
+├── data/                 → Datasets used for exercises 
 │
 ├── docs/                 → Documentation and reference material
 │ ├── howto/              → Practical guides (ROOT installation)
-│ └── teaching_material/  → Slides
+│ └── teaching_material/  → Slides and lecture material
 │
 ├── templates/            → Analysis templates or notebook skeletons
 │
-├── exercises/            → Exercises organized by lesson or topic
-│
-└── README.md
+└── exercises/            → Exercises organized by lesson or topic
 ```
 
 
