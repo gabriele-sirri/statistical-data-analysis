@@ -11,7 +11,7 @@
 
 <table>
   <tr>
-    <td> class 1  
+    <td valign="top"> class 1  
          <br> 2025-10-24
          <br> 9-13
     </td>
@@ -33,7 +33,7 @@
     </td>
   </tr>
  <tr>
-    <td> class 2  
+    <td valign="top"> class 2  
          <br> 2025-11-21
          <br> 9-13
     </td>
@@ -58,7 +58,7 @@
     </td>
   </tr>
 <tr>
-    <td> class 3  
+    <td valign="top"> class 3  
          <br> 2025-11-28
          <br> 9-13
     </td>
