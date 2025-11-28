@@ -1,6 +1,6 @@
 # Statistical Data Analysis for Nuclear and Subnuclear Physics <br> Module 3
 
-<mark style="background: #00ced1!important>📄 [Course Program and live sessions A.Y 2025/2025](classes/2025/)
+<mark style="background: #00ced1!important">📄 [Course Program and live sessions A.Y 2025/2025](classes/2025/)
 
 This repository contains the materials for **Module 3** of the _Statistical Data Analysis for Nuclear and Subnuclear Physics_ course, part of the Master’s Degree in Physics at the University of Bologna.
 
