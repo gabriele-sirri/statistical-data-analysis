@@ -26,8 +26,7 @@ Academic Year: 2025-26
       <br>   *  Visualization
       <br>   *  Data Sets
       <br>
-      <br>  <a href=live_coding_session1.cpp> live coding (cpp)</a>
-      <br>  <a href=live_coding_session1.ipynb> live coding (python)</a>
+      <br>  <a href=live_coding_session1.ipynb> live coding (python)</a> + <a href=live_coding_session1.cpp> (cpp)</a>
       <br>
       <br> Reference: Lab Session SLIDES, from 1 to 47
     </td>
@@ -39,20 +38,20 @@ Academic Year: 2025-26
     </td>
     <td>
       <br>   *  Composite models
-      <br>   ~~*  Convolution / Resolution Models~~
+      <br>  <s>*  Convolution / Resolution Models</s>
       <br>
-      <br> RooFit Workspace ~~and Factory~~
+      <br> RooFit Workspace <s>and Factory</s>
       <br> 
       <br> Common Fitting Errors
       <br>   * Understanding MINUIT output
       <br>   * Instabilities and correlation coefficients
       <br>
-      <br>  <a href=live_coding_session2_part1.py> live coding (python)</a>
+      <br>  <a href=live_coding_session2_part1.py> live coding, part 1(python)</a>
       <br>
-      <br> Working with Likelihood ~~and chi2~~ 
+      <br> Working with Likelihood <s>and chi2</s>
       <br>   * RooMinuit
       <br>
-      <br>  <a href=live_coding_session2_part2.py> live coding (python)</a>
+      <br>  <a href=live_coding_session2_part2.py> live coding, part 2 (python)</a>
       <br>
       <br> Reference: Lab Session SLIDES, from 48 to 81
     </td>
@@ -64,22 +63,26 @@ Academic Year: 2025-26
     </td>
     <td>
       <br> RooFit Model for a Number Counting Analysis
+      <br>
       <br> Incorporating systematics. 
       <br>   * Auxiliary Measurements: "on/off" problem, Signal/Control Regions.
       <br>   * Constraint terms: Global observables.
       <br>
-      <br> ~~Nuisance Parameters. Profile Likelihood.~~ 
-      <br> ~~Likelihood Intervals. Slice Likelihood vs Profile Likelihood~~
+      <br>  <a href=live_coding_session3_part1.ipynb> live coding, part 1 (python)</a>
+      <br>
+      <br> <s>Nuisance Parameters. Profile Likelihood.</s>
+      <br> <s>Likelihood Intervals. Slice Likelihood vs Profile Likelihood</s>
       <br> 
       <br> RooStats:
       <br>   * Intervals
       <br>   * Hypothesis test.
       <br>   * Significance.
       <br>   * P-value.
+      <br>
+      <br>  <a href=live_coding_session3_part2.ipynb> live coding, part 2 (python)</a>
       <br>      
       <br> Reference: Lab Session SLIDES, from 82 to 115
     </td>
   </tr>
 
 </table>
-
