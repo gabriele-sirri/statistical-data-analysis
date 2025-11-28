@@ -29,7 +29,7 @@
       <br>
       <br> Reference: Lab Session SLIDES, from 1 to 47
       <br> Read "Introduction" and "Conceptual blocks for modeling" 
-      <br> from [Practical Statistics for the LHC](https://arxiv.org/abs/1503.07622)
+      <br> from <a href=arxiv.org/abs/1503.07622> Practical Statistics for the LHC</a> by K. Cranmer
     </td>
   </tr>
  <tr>
