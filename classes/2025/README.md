@@ -1,12 +1,11 @@
 # Program of the Course
 
-course: Statistical Data Analysis for Nuclear and Subnuclear Physics
-module: Module 3 (hands-on)
+## Statistical Data Analysis for Nuclear and Subnuclear Physics
 
-course: Computer Science for High Energy Physics
-module: Module 3 (hands-on)
+## Computer Science for High Energy Physics
 
-Academic Year: 2025-26
+**Module 3 - hands-on sessions**
+**Academic Year: 2025-26**
 
 ---
 
@@ -29,7 +28,8 @@ Academic Year: 2025-26
       <br>  <a href=live_coding_session1.ipynb> live coding (python)</a> + <a href=live_coding_session1.cpp> (cpp)</a>
       <br>
       <br> Reference: Lab Session SLIDES, from 1 to 47
-      <br> Read "Introduction" and "Conceptual blocks for modeling" from [Practical Statistics for the LHC](https://arxiv.org/abs/1503.07622)
+      <br> Read "Introduction" and "Conceptual blocks for modeling" 
+      <br> from [Practical Statistics for the LHC](https://arxiv.org/abs/1503.07622)
     </td>
   </tr>
  <tr>
