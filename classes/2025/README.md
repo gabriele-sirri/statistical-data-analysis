@@ -26,8 +26,8 @@ Academic Year: 2025-26
       <br>   *  Visualization
       <br>   *  Data Sets
       <br>
-      <br>  [live coding, cpp](live_coding_session1.cpp) 
-      <br>  [live coding, py](live_coding_session1.ipynb) 
+      <br>  <a href=live_coding_session1.cpp> live coding (cpp)</a>
+      <br>  <a href=live_coding_session1.ipynb> live coding (python)</a>
       <br>
       <br> Reference: Lab Session SLIDES, from 1 to 47
     </td>
@@ -47,12 +47,12 @@ Academic Year: 2025-26
       <br>   * Understanding MINUIT output
       <br>   * Instabilities and correlation coefficients
       <br>
-      <br>  <a href=live_coding_session2_part1.py> live coding (python)
+      <br>  <a href=live_coding_session2_part1.py> live coding (python)</a>
       <br>
       <br> Working with Likelihood ~~and chi2~~ 
       <br>   * RooMinuit
       <br>
-      <br>  [live coding, py](live_coding_session2_part2.py)
+      <br>  <a href=live_coding_session2_part2.py> live coding (python)</a>
       <br>
       <br> Reference: Lab Session SLIDES, from 48 to 81
     </td>
