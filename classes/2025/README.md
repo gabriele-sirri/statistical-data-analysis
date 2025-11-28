@@ -29,6 +29,7 @@ Academic Year: 2025-26
       <br>  <a href=live_coding_session1.ipynb> live coding (python)</a> + <a href=live_coding_session1.cpp> (cpp)</a>
       <br>
       <br> Reference: Lab Session SLIDES, from 1 to 47
+      <br> Read "Introduction" and "Conceptual blocks for modeling" from [Practical Statistics for the LHC](https://arxiv.org/abs/1503.07622)
     </td>
   </tr>
  <tr>
