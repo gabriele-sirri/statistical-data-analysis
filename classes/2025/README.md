@@ -16,7 +16,7 @@
          <br> 9-13
     </td>
     <td>
-      <br> Conceptual elements of Data Modelling
+           Conceptual elements of Data Modelling
       <br>   *  Marked Poisson Model
       <br>   *  Rate/Shape Analysis
       <br>   *  Channels vs Physics Processes (components)
@@ -38,6 +38,7 @@
          <br> 9-13
     </td>
     <td>
+           RooFit 
       <br>   *  Composite models
       <br>  <s>*  Convolution / Resolution Models</s>
       <br>
@@ -63,7 +64,7 @@
          <br> 9-13
     </td>
     <td>
-      <br> RooFit Model for a Number Counting Analysis
+            RooFit Model for a Number Counting Analysis
       <br>
       <br> Incorporating systematics. 
       <br>   * Auxiliary Measurements: "on/off" problem, Signal/Control Regions.
