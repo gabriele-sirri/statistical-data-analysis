@@ -87,5 +87,21 @@
       <br> Reference: Lab Session SLIDES, from 82 to 115
     </td>
   </tr>
-
+<tr>
+    <td valign="top"> class 3  
+         <br> 2025-12-05
+         <br> 9-13
+    </td>
+    <td>
+           <a href=live_coding_session3_part1.ipynb> live coding, part 1 (python)</a>
+      <br>
+      <br> Multivariate Analysis:
+      <br>   * TMVA
+      <br>
+      <br>  <a href=live_coding_session4_part2.ipynb> live coding, part 2 (python)</a>
+      <br>      
+      <br> Reference: Lab Session SLIDES, from 115 to 145
+    </td>
+  </tr>
+  
 </table>
