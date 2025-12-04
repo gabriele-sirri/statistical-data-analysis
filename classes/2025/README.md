@@ -88,7 +88,7 @@
     </td>
   </tr>
 <tr>
-    <td valign="top"> class 3  
+    <td valign="top"> class 4 
          <br> 2025-12-05
          <br> 9-13
     </td>
