@@ -95,8 +95,12 @@
     <td>
            <a href=live_coding_session4_part1.ipynb> live coding, part 1 (python)</a>
       <br>
+      <br> - quick look to written exams (examples available on <a href= https://virtuale.unibo.it/> Virtuale</a>)
+      <br>
       <br> Multivariate Analysis:
       <br>   * TMVA
+      <br>
+      <br> - questionaire
       <br>
       <br>  <a href=live_coding_session4_part2.ipynb> live coding, part 2 (python)</a>
       <br>      
