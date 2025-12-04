@@ -93,7 +93,7 @@
          <br> 9-13
     </td>
     <td>
-           <a href=live_coding_session3_part1.ipynb> live coding, part 1 (python)</a>
+           <a href=live_coding_session4_part1.ipynb> live coding, part 1 (python)</a>
       <br>
       <br> Multivariate Analysis:
       <br>   * TMVA
