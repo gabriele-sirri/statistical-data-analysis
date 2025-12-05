@@ -97,12 +97,10 @@
       <br>
       <br> - quick look to written exams (examples available on <a href= https://virtuale.unibo.it/> Virtuale</a>)
       <br>
+      <br> - questionaire****
+      <br>
       <br> Multivariate Analysis:
       <br>   * TMVA
-      <br>
-      <br> - questionaire
-      <br>
-      <br>  <a href=live_coding_session4_part2.ipynb> live coding, part 2 (python)</a>
       <br>      
       <br> Reference: Lab Session SLIDES, from 115 to 145
     </td>
