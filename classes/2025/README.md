@@ -93,7 +93,7 @@
          <br> 9-13
     </td>
     <td>
-           <a href=live_coding_session4_part1.ipynb> live coding, part 1 (python)</a>
+           <a href=live_coding_session4.ipynb> live coding (python + cpp)</a>
       <br>
       <br> - quick look to written exams (examples available on <a href= https://virtuale.unibo.it/> Virtuale</a>)
       <br>
