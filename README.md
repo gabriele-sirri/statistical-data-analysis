@@ -136,7 +136,7 @@ Before attending the lab sessions, students are expected to:
   * **General Setup Guides** from the course 
       _“Programmazione per la Fisica”_ 
      (Bachelor’s Degree in Physics, University of Bologna):  
-     + [Windows Subsystem for Linux (WSL)](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/WSLGuide.md) _(in Italian)_  
+     + [Windows Subsystem for Linux (WSL)](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/windowsGuide.md) _(in Italian)_  
      + [macOS](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/macOSGuide.md) _(in Italian)_  
      + [ROOT Framework Installation](https://github.com/Programmazione-per-la-Fisica/howto/tree/main/ROOT-installation)  
   * for Windows 7, 8, 10 (up to build 10511)
