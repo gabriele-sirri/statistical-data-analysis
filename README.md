@@ -1,6 +1,9 @@
 # Statistical Data Analysis for Nuclear and Subnuclear Physics <br> Module 3
 
-<mark style="background: #00ced1!important">📄 [Course Program and live sessions A.Y 2025/2025](classes/2025/)
+[![SWAN](https://swan.docs.cern.ch/images/logos/open_in_swan.svg)](https://cern.ch/swanserver/cgi-bin/go?projurl=https://github.com/root-project/root-cpp-course.git)
+[![Github Codespace](https://img.shields.io/badge/open-GH_Codespaces-blue?logo=github)](https://codespaces.new/root-project/root-cpp-course?quickstart=1)
+
+<mark style="background: #00ced1!important">📄 [Course Program and live sessions](classes/2025/)
 
 This repository contains the materials for **Module 3** of the _Statistical Data Analysis for Nuclear and Subnuclear Physics_ course, part of the Master’s Degree in Physics at the University of Bologna.
 
@@ -11,7 +14,8 @@ This repository contains the materials for **Module 3** of the _Statistical Data
 statistical-data-analysis/
 │
 ├── classes/              → Live coding sessions from the classes
-│ └── 2025/               → Materials for the 2025/26 academic year
+│ ├── 2025/               → Materials for the 2025/26 academic year
+│ └── 2026/               → Materials for the 2026/27 academic year
 │ 
 ├── data/                 → Datasets used for exercises 
 │
