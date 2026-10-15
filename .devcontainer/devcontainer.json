@@ -1,0 +1,22 @@
+{
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "hostRequirements": {
+        "cpus": 2
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-toolsai.jupyter",
+                "ms-python.python",
+                "ms-vscode.cpptools",
+                "donjayamanne.vscode-default-python-kernel"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/opt/conda/envs/sda/bin/python"
+            }
+        }
+    }
+}

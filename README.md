@@ -1,7 +1,7 @@
 # Statistical Data Analysis for Nuclear and Subnuclear Physics <br> Module 3
 
-[![SWAN](https://swan.docs.cern.ch/images/logos/open_in_swan.svg)](https://cern.ch/swanserver/cgi-bin/go?projurl=https://github.com/gabriele-sirri/statistical-data-analysis.git)
 [![Github Codespace](https://img.shields.io/badge/open-GH_Codespaces-blue?logo=github)](https://codespaces.new/gabriele-sirri/statistical-data-analysis?quickstart=1)
+[![SWAN](https://swan.docs.cern.ch/images/logos/open_in_swan.svg)](https://cern.ch/swanserver/cgi-bin/go?projurl=https://github.com/gabriele-sirri/statistical-data-analysis.git)
 
 <mark style="background: #00ced1!important">📄 [Course Program and live sessions](classes/2025/)
 
