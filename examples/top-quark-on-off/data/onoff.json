@@ -1,0 +1,8 @@
+{
+  "n_on": 17,
+  "n_off": 40,
+  "tau": 10.53,
+  "b_hat": 3.8,
+  "sigma_b": 0.6,
+  "comment": "n_on: events in the signal region; n_off: events in the control region; tau: control/signal exposure ratio; b_hat = n_off/tau, sigma_b = sqrt(n_off)/tau"
+}
