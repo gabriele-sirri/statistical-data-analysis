@@ -1,0 +1,14 @@
+name: sda
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - root            # PyROOT, RooFit, RooStats, TMVA
+  - cxx-compiler    # C++ macros / ACLiC
+  - jupyterlab
+  - ipykernel
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - mplhep
