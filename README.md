@@ -1,9 +1,10 @@
 # Statistical Data Analysis for Nuclear and Subnuclear Physics
 
 [![Github Codespace](https://img.shields.io/badge/open-GH_Codespaces-blue?logo=github)](https://codespaces.new/gabriele-sirri/statistical-data-analysis?quickstart=1)
+[![SWAN](https://swan.docs.cern.ch/images/logos/open_in_swan.svg)](https://cern.ch/swanserver/cgi-bin/go?projurl=https://github.com/gabriele-sirri/statistical-data-analysis.git)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/gabriele-sirri/statistical-data-analysis/main)
 
 Hands-on lab module on ROOT, RooFit, RooStats and HistFactory, for experimental particle and astroparticle physics.
-
 
 ## Layout
 
