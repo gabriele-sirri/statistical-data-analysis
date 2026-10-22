@@ -96,7 +96,7 @@ $$P(n,\{\vec{x}_i\}\,|\,\theta) \;=\; \text{Pois}(n\,|\,\nu(\theta)) \;\prod_{i=
 - $f(\vec{x}\,|\,\theta)$: normalised pdf of the marks → **shape**
 - Rate-only = counting experiment. Shape-only = $\nu$ is not interesting (fix or ignore)
 
-Reference: Cranmer, *Practical Statistics for the LHC*, arXiv:1503.07622
+Reference: K. Cranmer, *Practical Statistics for the LHC*, [arXiv:1503.07622](https://arxiv.org/abs/1503.07622)
 
 ---
 
@@ -155,10 +155,10 @@ $$\nu = \sum_p \nu_p, \qquad f(x) = \sum_p \frac{\nu_p}{\nu}\, f_p(x)$$
 
 | Example | Observable $x$ | Signal | Background |
 |---|---|---|---|
-| LHCb | $m(p\bar p)$ | $B^0$ peak | combinatorial |
-| CUORE-0 | energy | peak | flat/exponential |
-| IceCube | zenith / energy | oscillation | atmospheric |
-| MAGIC | image parameter | $\gamma$ | hadrons |
+| LHCb | $m(p\bar p)$ | $B^0 \to p\bar p$ decay | random $p\bar p$ pairs (combinatorial) |
+| CUORE-0 | energy | $0\nu\beta\beta$ decay of $^{130}$Te | natural radioactivity of the materials |
+| IceCube | zenith / energy | $\nu_\mu$ oscillation (disappearance) | atmospheric muons, other neutrino flavours |
+| MAGIC | image parameter | $\gamma$ rays | hadrons (cosmic-ray showers) |
 
 Different fields, **same structure**.
 
@@ -166,19 +166,18 @@ Different fields, **same structure**.
 
 # Why RooFit?
 
-RooFit = a toolkit to **build, combine, fit and share** probability models.
+**RooFit** is the ROOT toolkit to **build, combine, fit and share** probability models.
+With **RooStats** (tests, intervals, limits) and **HistFactory** (binned models) it is part of ROOT.
 
 - Models are **objects**: compose them, don't rewrite the likelihood
-- Normalisation, toys, plots, composite and simultaneous fits come for free
+- **Normalisation for free**: the pdf is always normalised, also with range limits, projections and composite models
+- Toys, plots, composite and simultaneous fits come for free
 - The model lives in a **workspace**: it goes straight into RooStats and HistFactory
+- Used by the main LHC collaborations, mostly **indirectly**, inside larger frameworks
 
-Honest comparison (we use RooFit because it is what experiments use):
+Honest comparison: `scipy`/`iminuit` (simple fits), `zfit`, `pyhf` (modern Python tools; pyhf = HistFactory in Python). We use RooFit for the **full chain**: model → workspace → RooStats.
 
-| Tool | Strength |
-|---|---|
-| `scipy` / `iminuit` | simple fits, pure Python |
-| `zfit`, `pyhf` | modern Python alternatives (pyhf = HistFactory in Python) |
-| **RooFit** | full chain model → workspace → RooStats, used in collaborations |
+Links: [RooFit](https://root.cern/manual/roofit/) · [RooStats](https://root.cern/manual/roostats/) · [HistFactory](https://root.cern/doc/master/group__HistFactory.html)
 
 ---
 
@@ -225,7 +224,7 @@ Generate 10 000 **unbinned** events, fit with ML, plot the result.
 2. Repeat A1 with 100 events instead of 10 000. What changes?
 3. Why is the error on $\sigma$ different from the error on the mean?
 
-Notebook: `course/lab1/ex_A.ipynb`  ·  Reference: tutorials `rf101`, `rf201`, `rf202`
+Notebook: `course/lab1/ex_A.ipynb`  ·  Reference: ROOT tutorials [`rf101`](https://root.cern/doc/master/rf101__basics_8C.html), [`rf201`](https://root.cern/doc/master/rf201__composite_8C.html), [`rf202`](https://root.cern/doc/master/rf202__extendedmlfit_8C.html)
 
 ---
 
@@ -240,7 +239,7 @@ Notebook: `course/lab1/ex_A.ipynb`  ·  Reference: tutorials `rf101`, `rf201`, `
 | Object | Role | Example |
 |---|---|---|
 | `RooRealVar` | variable / parameter, with range | `x`, `mean` |
-| `RooAbsPdf` | normalised density | `RooGaussian`, `RooExponential` |
+| pdf (derives from `RooAbsPdf`) | normalised density | `RooGaussian`, `RooExponential` |
 | `RooDataSet` / `RooDataHist` | unbinned / binned data | `generate`, `generateBinned` |
 | `RooPlot` | frame to overlay data, pdf, pulls | `x.frame()` |
 
