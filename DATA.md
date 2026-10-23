@@ -8,7 +8,7 @@ Entries marked *to confirm* were inferred from those READMEs and have to be chec
 | `cms-higgs-4l` | CMS Open Data, tutorial *HiggsExample11-12*; paper arXiv:1207.7235 | downloaded files + simulated templates | CERN Open Data Portal terms (CMS open data: CC0), *to confirm* |
 | `cuore0` | simplified problem modelled on CUORE-0; paper arXiv:1504.02454 | simulated or modelled, *to confirm* | not an official data release; cite the paper |
 | `enubet-test-beam` | inspired by Fig. 4 of J. Phys.: Conf. Ser. 1056 (2018) 012047 | digitised from a figure, *to confirm* | not an official data release; cite the paper |
-| `icecube-oscillations` | IceCube data release, arXiv:1410.7227, https://icecube.wisc.edu/science/data/nu_osc | downloaded from the data-release page | terms of the IceCube data-release page, *to check* |
+| `icecube-oscillations` | IceCube data release, 3 years of muon-neutrino disappearance data, arXiv:1410.7227 | downloaded from the data-release page | see the [release page](https://icecube.wisc.edu/data-releases/2015/01/icecube-oscillations-3-years-muon-neutrino-disappearance-data/) |
 | `lhcb-b0-ppbar` | simplified problem built for teaching; paper arXiv:1709.01156 | simulated or modelled, *to confirm* | not an official data release; cite the paper |
 | `magic-gamma-hadron` | UCI Machine Learning Repository, MAGIC Gamma Telescope (Monte Carlo events) | downloaded | CC BY 4.0 |
 | `minos-oscillations` | inspired by Figs. 1–2 of arXiv:1304.6335; unoscillated simulation | digitised from figures + simulated events, *to confirm* | not an official data release; cite the paper |

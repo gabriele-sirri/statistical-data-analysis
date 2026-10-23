@@ -92,7 +92,7 @@ An experiment records $n$ events, each with measured features $\vec{x}_i$ (the "
 
 $$P(n,\{\vec{x}_i\}\,|\,\theta) \;=\; \text{Pois}(n\,|\,\nu(\theta)) \;\prod_{i=1}^{n} f(\vec{x}_i\,|\,\theta)$$
 
-- $\nu(\theta)$: expected number of events → **rate**
+- $\nu(\theta)$: expected number of events → **rate** (also called **yield**)
 - $f(\vec{x}\,|\,\theta)$: normalised pdf of the marks → **shape**
 - Rate-only = counting experiment. Shape-only = $\nu$ is not interesting (fix or ignore)
 
@@ -106,6 +106,8 @@ Reference: K. Cranmer, *Practical Statistics for the LHC*, [arXiv:1503.07622](ht
 |---|---|---|---|
 | **Observable** (data) | Roman | $x$, $m$, $E$, $n$ | measured, event by event |
 | **Parameter** | Greek | $\mu$, $\sigma$, $\tau$, $\nu$, $\theta$ | unknown constant of the model |
+
+Example, a Gaussian: $\text{Gauss}(x;\mu,\sigma)=\dfrac{1}{\sqrt{2\pi}\,\sigma}\,e^{-(x-\mu)^2/2\sigma^2}$. Here $x$ is the **observable**, $\mu$ and $\sigma$ are the **parameters**: the semicolon separates them.
 
 - $n$ = events **observed**, $\nu$ = events **expected**
 - A hat is an **estimate** from the data: $\hat\theta$ is the best-fit value
@@ -123,7 +125,7 @@ Reference: K. Cranmer, *Practical Statistics for the LHC*, [arXiv:1503.07622](ht
 | You must give | the **range** | a **starting value** and an **allowed interval** (or fix it) |
 | What the range is | the domain where the pdf is **normalised**: $\int f\,dx = 1$ | a **bound for the minimiser**: it cannot leave it |
 | Events outside | **not in the fit** | not applicable |
-| The fit depends on it | **yes**: shape, normalisation, and (extended fit) the yields $N_s$, $N_b$ | **yes**: if the minimum is near a limit, or the interval is badly chosen |
+| The fit depends on it | **yes**: shape, normalisation, and the rates $N_s$, $N_b$ (number of events in the range) | **yes**: if the minimum is near a limit, or the interval is badly chosen |
 
 The range of an observable **defines the model**. The range of a parameter **steers the search**.
 
@@ -131,19 +133,14 @@ The range of an observable **defines the model**. The range of a parameter **ste
 
 # Parameter limits: what can go wrong
 
-- **Too narrow**: the best fit sits on the boundary. The printout shows it, and the errors (HESSE, MINOS) are **not reliable** there
-- **Too wide**: slow or failed convergence, and unphysical regions ($\sigma \le 0$, negative yields)
+`fitTo` calls the minimiser **MINUIT**: it moves the parameters inside their allowed interval and returns the best values and their errors (details in Lab 2).
+
+- **Too narrow**: the best fit sits on the boundary. The printout shows it, and the **errors are not reliable** there
+- **Too wide**: slow or failed convergence, and unphysical regions ($\sigma \le 0$, negative numbers of events)
+- **Unbounded**: RooFit warns you (for example for a width). Read the warnings
 - **Start near the expected value**: the starting value is not the range
-- **Physical or numerical?** A limit like $\mu \ge 0$ is physics and can change the inference (Lab 3). A loose limit to help MIGRAD is numerics. **Say which one it is**
+- **Physical or numerical?** A limit like $\mu \ge 0$ is physics: it can change the result (Lab 3). A limit only to avoid silly values (like $\sigma > 0$) is numerics: it must not touch the best value. **Say which one it is**
 - To keep a parameter out of the fit: `par.setConstant(True)`
-
-Try on the minimal program:
-
-```python
-sigma.setRange(0.1, 2)        # the true value, 3, is now outside: look at sigma and its error
-x.setRange("fit", -5, 5)      # a sub-range of the observable
-gauss.fitTo(data, Range="fit")  # what changes, and why?
-```
 
 ---
 
@@ -170,14 +167,14 @@ Different fields, **same structure**.
 With **RooStats** (tests, intervals, limits) and **HistFactory** (binned models) it is part of ROOT.
 
 - Models are **objects**: compose them, don't rewrite the likelihood
-- **Normalisation for free**: the pdf is always normalised, also with range limits, projections and composite models
+- **Normalisation for free**: the pdf is always normalised, also with range limits, projections and composite models. **Saves a lot of work and mistakes**
 - Toys, plots, composite and simultaneous fits come for free
 - The model lives in a **workspace**: it goes straight into RooStats and HistFactory
 - Used by the main LHC collaborations, mostly **indirectly**, inside larger frameworks
 
 Honest comparison: `scipy`/`iminuit` (simple fits), `zfit`, `pyhf` (modern Python tools; pyhf = HistFactory in Python). We use RooFit for the **full chain**: model → workspace → RooStats.
 
-Links: [RooFit](https://root.cern/manual/roofit/) · [RooStats](https://root.cern/manual/roostats/) · [HistFactory](https://root.cern/doc/master/group__HistFactory.html)
+Links: [RooFit](https://root.cern/manual/roofit/) · [RooStats](https://root.cern/doc/master/group__Roostats.html) · [HistFactory](https://root.cern/doc/master/group__HistFactory.html)
 
 ---
 
@@ -191,6 +188,7 @@ Links: [RooFit](https://root.cern/manual/roofit/) · [RooStats](https://root.cer
 
 ```python
 import ROOT
+%jsroot on      # notebook only (Binder, SWAN): draws the canvas in the page
 
 x     = ROOT.RooRealVar("x", "x", -10, 10)
 mean  = ROOT.RooRealVar("mean", "mean", 0, -10, 10)
@@ -208,6 +206,7 @@ frame.Draw()
 
 - Variables are shared objects: the pdf *knows* `mean` and `sigma`
 - Pythonic keyword arguments (`Save=True`) replace `RooFit.Save()`
+- **Try it**: refit with a narrow limit, `sigma.setRange(0.1, 2)`, then with a sub-range, `x.setRange("fit", -5, 5)` and `gauss.fitTo(data, Range="fit")`. Compare the **best values and the errors** with the first fit: what changed, and why?
 
 ---
 
@@ -224,7 +223,7 @@ Generate 10 000 **unbinned** events, fit with ML, plot the result.
 2. Repeat A1 with 100 events instead of 10 000. What changes?
 3. Why is the error on $\sigma$ different from the error on the mean?
 
-Notebook: `course/lab1/ex_A.ipynb`  ·  Reference: ROOT tutorials [`rf101`](https://root.cern/doc/master/rf101__basics_8C.html), [`rf201`](https://root.cern/doc/master/rf201__composite_8C.html), [`rf202`](https://root.cern/doc/master/rf202__extendedmlfit_8C.html)
+Notebook: `course/lab1/ex_A.ipynb`  ·  Reference: ROOT [RooFit tutorials](https://root.cern/doc/master/group__tutorial__roofit__main.html), in C++ and Python: `rf101_basics`, `rf201_composite`, `rf202_extendedmlfit`
 
 ---
 
@@ -256,13 +255,13 @@ Rules of thumb
 
 $$-\ln L = -\sum_i \ln f(x_i\,|\,\theta)$$
 
-**Binned**: Poisson in each bin, expected $\nu_j(\theta)$, observed $n_j$
+**Binned**: histogram, **Poisson in each bin**, expected $\nu_j(\theta)$, observed $n_j$
 
 $$-\ln L = \sum_j \big[\nu_j(\theta) - n_j \ln \nu_j(\theta)\big]$$
 
-- Binned is **not** a $\chi^2$ fit: it is exact for low counts, empty bins included
+- Binned is **not** a $\chi^2$ fit: it is exact also for low counts, empty bins included
 - Binned loses information if bins are wide; unbinned is slower with many events
-- Same pdf, same code: only the dataset type changes
+- **In RooFit** the pdf and the code are the same: only the dataset changes (`RooDataSet` unbinned, `RooDataHist` binned)
 
 ---
 
@@ -288,25 +287,22 @@ Notebook: `course/lab1/ex_B.ipynb`
 
 ---
 
-# Adding pdfs: shape-only vs extended
+# Adding pdfs: extended vs shape-only
 
-**Shape-only** (fractions): total yield $N$ is fixed by the data
+The **number of coefficients** tells RooFit what you mean.
 
-$$f(x) = f_s\, f_{\rm sig}(x) + (1-f_s)\, f_{\rm bkg}(x)$$
-
-**Extended** (yields): the marked Poisson model of Talk A
-
-$$\mathcal{L} = \text{Pois}(n\,|\,N_s+N_b)\prod_i \frac{N_s f_{\rm sig}(x_i)+N_b f_{\rm bkg}(x_i)}{N_s+N_b}$$
+**Extended**: one coefficient per pdf = the **number of events** of each component. This is the marked Poisson model of Talk A: $\mathcal{L}=\text{Pois}(n\,|\,N_s+N_b)\prod_i \frac{N_s f_{\rm sig}(x_i)+N_b f_{\rm bkg}(x_i)}{N_s+N_b}$
 
 ```python
-model = ROOT.RooAddPdf("model", "sig+bkg",
-                       ROOT.RooArgList(sig, bkg),
-                       ROOT.RooArgList(nsig, nbkg))
-model.fitTo(data, Extended=True)
-model.plotOn(frame, Components="bkg", LineStyle="--")
+model = ROOT.RooAddPdf("model", "sig+bkg", ROOT.RooArgList(sig, bkg), ROOT.RooArgList(nsig, nbkg))
 ```
 
-- Extended fit → the **yield is a parameter** (this is the rate/shape split in code)
+**Shape-only**: **one coefficient fewer** = fractions, the last is $1-\sum$. The total number of events is fixed by the data: $f = f_s f_{\rm sig} + (1-f_s) f_{\rm bkg}$
+
+```python
+model = ROOT.RooAddPdf("model", "sig+bkg", ROOT.RooArgList(sig, bkg), ROOT.RooArgList(fsig))
+model.fitTo(data)    # the extended term is included automatically when needed
+```
 
 ---
 

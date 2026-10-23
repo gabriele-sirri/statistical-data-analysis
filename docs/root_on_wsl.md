@@ -24,82 +24,15 @@ To access Linux folders directly in File Explorer, open:
 
 ---
 
-## 2. Install ROOT on Ubuntu 24.04
+## 2. Install ROOT and Jupyter
 
-**Reference:**  
-[ROOT Installation Guide](https://github.com/Programmazione-per-la-Fisica/howto/blob/main/other-OSes/rootGuide.md) by _Programmazione per la Fisica_ 
-in Italian
+WSL runs Ubuntu: open the Ubuntu terminal and follow [`root_on_ubuntu.md`](root_on_ubuntu.md).
 
-### Steps
-
-#### 1️⃣ Update Packages
-```bash
-sudo apt update && sudo apt upgrade -y
-```
-
-#### 2️⃣ Install Dependencies
-```bash
-sudo apt install binutils cmake dpkg-dev g++ gcc libssl-dev git \
-libx11-dev libxext-dev libxft-dev libxpm-dev python3 libtbb-dev \
-libvdt-dev libgif-dev gfortran libpcre3-dev libglu1-mesa-dev \
-libglew-dev libftgl-dev libfftw3-dev libcfitsio-dev libgraphviz-dev \
-libavahi-compat-libdnssd-dev libldap2-dev python3-dev python3-numpy \
-libxml2-dev libkrb5-dev libgsl-dev qtwebengine5-dev \
-nlohmann-json3-dev libmysqlclient-dev libgl2ps-dev liblzma-dev \
-libxxhash-dev liblz4-dev -y
-```
-
-> ⚠️ `libzstd-dev` may cause installation errors — skip if needed.
-
-```bash
-sudo apt install libgsl0-dev -y
-```
-
-#### 3️⃣ Download and Extract ROOT
-
-Choose the correct ROOT binary for your Linux distribution, then run:
-
-```bash
-cd $HOME
-wget https://root.cern/download/root_v6.36.04.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz
-tar -xzvf root_v6.36.04.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz
-```
-
-#### 4️⃣ Set Up the ROOT Environment
-
-Add ROOT to your shell startup file, e.g. using the commands below: 
-
-```bash
-echo >> ~/.bashrc
-echo "source \$HOME/root/bin/thisroot.sh" >> ~/.bashrc
-cat ~/.bashrc
-exit
-```
-
-#### 5️⃣ Verify Installation
-```bash
-wsl
-cd $HOME
-root
-root[] new TBrowser
-root[].q
-```
+To check it later from Windows, open a new terminal and run `wsl`, then `cd $HOME` and `root`.
 
 ---
 
-## 3. Install Jupyter Notebook on Ubuntu 24.04
-
-**Reference:**  
-[Install Jupyter Notebook on Ubuntu 24.04](https://docs.vultr.com/how-to-install-jupyter-notebook-on-ubuntu-24-04)
-
-```bash
-sudo apt install jupyter-notebook -y
-jupyter-notebook --version
-```
-
----
-
-## 4. Developing in WSL with Visual Studio Code
+## 3. Developing in WSL with Visual Studio Code
 
 https://code.visualstudio.com/docs/remote/wsl
 

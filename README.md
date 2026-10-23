@@ -47,7 +47,7 @@ Students are encouraged to **bring a laptop with a working ROOT environment, pre
  If this is not possible, or if you cannot run ROOT, you can use  **GitHub Codespaces in a browser on the lab computers** (a free GitHub account is required: create it before the first lab).
 
 1. Install ROOT with the guides in [`docs/`](docs/):
-   [Windows](docs/root_on_windows.md) · [Windows with WSL](docs/root_on_wsl.md) · [Binder](docs/root_on_binder.md) · [Google Colab](docs/root_on_colab.ipynb).
+   [Windows](docs/root_on_windows.md) · [Windows with WSL](docs/root_on_wsl.md) · [Ubuntu](docs/root_on_ubuntu.md) · [Binder](docs/root_on_binder.md) · [Google Colab](docs/root_on_colab.ipynb).
    For a local installation use the course environment: `conda env create -f environment.yml`.
 2. Check it: `python course/tools/check_setup.py`. Every line must say **PASS**. Do it **before Lab 1** and send the output to the instructor if something says FAIL.
 3. No working ROOT? Open the repository in Codespaces: the badge above, or *Code → Codespaces → Create codespace*.
