@@ -40,3 +40,21 @@ A histogram has expected $\nu_j(\theta)$ and observed $n_j$ in bin $j$. Three wa
 - S. Baker and R. D. Cousins, *Clarification of the use of chi-square and likelihood functions in fits to histograms*, Nucl. Instrum. Methods 221 (1984) 437
 - G. Cowan, K. Cranmer, E. Gross, O. Vitells, *Asymptotic formulae for likelihood-based tests of new physics*, [arXiv:1007.1727](https://arxiv.org/abs/1007.1727) (Wilks' theorem and the Asimov dataset)
 - ROOT tutorials: [`rf602_chi2fit`](https://root.cern/doc/master/rf602__chi2fit_8py.html), [`rf614_binned_fit_problems`](https://root.cern/doc/master/rf614__binned__fit__problems_8py.html)
+
+---
+
+# Backup: RDataFrame in three lines
+
+```python
+df = ROOT.RDataFrame("tree", "file.root")                          # a tree (or a list of files)
+h  = (df.Filter("pt > 20")                                          # selection: string with C++ code
+        .Define("m2", "m*m")                                        # new column
+        .Histo1D(("h", "h", 50, 0, 100), "m"))                      # nothing runs yet: lazy
+h.Draw()                                                            # the loop over the events runs here
+```
+
+- **Lazy**: the operations are recorded and run **once**, in one loop over the data
+- `df.Count().GetValue()` = number of events, `df.AsNumpy(["m"])` = columns as numpy arrays
+- Faster than a Python `for` loop, because the loop and the expressions are compiled C++
+- Used again in Lab 4 (`Vary`, systematic variations)
+

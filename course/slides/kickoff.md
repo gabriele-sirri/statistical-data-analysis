@@ -3,8 +3,8 @@ marp: true
 theme: default
 paginate: false
 style: |
-  section { font-size: 28px; }
-  section h1 { font-size: 40px; }
+  section { font-size: 24px; }
+  section h1 { font-size: 36px; }
   code { font-size: 0.85em; }
 ---
 

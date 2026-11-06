@@ -92,9 +92,13 @@ An experiment records $n$ events, each with measured features $\vec{x}_i$ (the "
 
 $$P(n,\{\vec{x}_i\}\,|\,\theta) \;=\; \text{Pois}(n\,|\,\nu(\theta)) \;\prod_{i=1}^{n} f(\vec{x}_i\,|\,\theta)$$
 
-- $\nu(\theta)$: expected number of events → **rate** (also called **yield**)
-- $f(\vec{x}\,|\,\theta)$: normalised pdf of the marks → **shape**
-- Rate-only = counting experiment. Shape-only = $\nu$ is not interesting (fix or ignore)
+$\nu(\theta)$: expected number of events (**yield**) → **rate**  
+$f(\vec{x}\,|\,\theta)$: normalised pdf of the marks → **shape**
+- **Rate-only** = counting experiment
+- **Shape-only**: $\nu$ is not interesting. The Poisson term is dropped and $n$ is fixed: $\prod_i f(\vec{x}_i\,|\,\theta)$
+- **Extended** (shape + rate): $\nu$ depends on $\theta$, so the data constrain both. Use it when the rate is the result (cross-section, branching fraction, discovery)
+
+_This is the model of **one channel** (see the slide on channels)_
 
 Reference: K. Cranmer, *Practical Statistics for the LHC*, [arXiv:1503.07622](https://arxiv.org/abs/1503.07622)
 
@@ -125,39 +129,26 @@ Example, a Gaussian: $\text{Gauss}(x;\mu,\sigma)=\dfrac{1}{\sqrt{2\pi}\,\sigma}\
 | You must give | the **range** | a **starting value** and an **allowed interval** (or fix it) |
 | What the range is | the domain where the pdf is **normalised**: $\int f\,dx = 1$ | a **bound for the minimiser**: it cannot leave it |
 | Events outside | **not in the fit** | not applicable |
-| The fit depends on it | **yes**: shape, normalisation, and the rates $N_s$, $N_b$ (number of events in the range) | **yes**: if the minimum is near a limit, or the interval is badly chosen |
+| The fit depends on it | **yes**: shape, normalisation, and the rates $\nu_s$, $\nu_b$ (number of events in the range) | **yes**: if the minimum is near a limit, or the interval is badly chosen |
 
-The range of an observable **defines the model**. The range of a parameter **steers the search**.
-
----
-
-# Parameter limits: what can go wrong
-
-`fitTo` calls the minimiser **MINUIT**: it moves the parameters inside their allowed interval and returns the best values and their errors (details in Lab 2).
-
-- **Too narrow**: the best fit sits on the boundary. The printout shows it, and the **errors are not reliable** there
-- **Too wide**: slow or failed convergence, and unphysical regions ($\sigma \le 0$, negative numbers of events)
-- **Unbounded**: RooFit warns you (for example for a width). Read the warnings
-- **Start near the expected value**: the starting value is not the range
-- **Physical or numerical?** A limit like $\mu \ge 0$ is physics: it can change the result (Lab 3). A limit only to avoid silly values (like $\sigma > 0$) is numerics: it must not touch the best value. **Say which one it is**
-- To keep a parameter out of the fit: `par.setConstant(True)`
+The range of an observable **defines the model**. The range of a parameter **steers the search** (more on parameter limits in Lab 2).
 
 ---
 
-# Channels and processes
+# Channels, physics processes and components
 
-Several **processes** (signal, backgrounds) contribute to one **channel**:
+A **channel** is a subset of the **data**, selected with a **criterion**, for example "$B^0$ candidates". It is not a physics process.
 
-$$\nu = \sum_p \nu_p, \qquad f(x) = \sum_p \frac{\nu_p}{\nu}\, f_p(x)$$
+Each **physics process** (signal, backgrounds) contributes a **component** to the model of the channel:
 
-| Example | Observable $x$ | Signal | Background |
-|---|---|---|---|
-| LHCb | $m(p\bar p)$ | $B^0 \to p\bar p$ decay | random $p\bar p$ pairs (combinatorial) |
-| CUORE-0 | energy | $0\nu\beta\beta$ decay of $^{130}$Te | natural radioactivity of the materials |
-| IceCube | zenith / energy | $\nu_\mu$ oscillation (disappearance) | atmospheric muons, other neutrino flavours |
-| MAGIC | image parameter | $\gamma$ rays | hadrons (cosmic-ray showers) |
+$$\nu = \sum_c \nu_c, \qquad f(x) = \sum_c \frac{\nu_c}{\nu}\, f_c(x)$$
 
-Different fields, **same structure**.
+| Experiment | Channel | Observable | Signal (physics process) | Background (physics process) |
+|---|---|---|---|---|
+| LHCb | $B^0$ candidates | $m_{p\bar p}$ | $B^0 \to p\bar p$ decay | random $p\bar p$ pairs |
+| CUORE-0 | $0\nu\beta\beta$-like events | energy | $0\nu\beta\beta$ decay | radioactivity of the materials |
+
+*Careful: "decay channel" in particle physics means something else. In Lab 4, HistFactory calls a component a **sample**.*
 
 ---
 
@@ -188,7 +179,7 @@ Links: [RooFit](https://root.cern/manual/roofit/) · [RooStats](https://root.cer
 
 ```python
 import ROOT
-%jsroot on      # notebook only (Binder, SWAN): draws the canvas in the page
+%jsroot on
 
 x     = ROOT.RooRealVar("x", "x", -10, 10)
 mean  = ROOT.RooRealVar("mean", "mean", 0, -10, 10)
@@ -223,7 +214,7 @@ Generate 10 000 **unbinned** events, fit with ML, plot the result.
 2. Repeat A1 with 100 events instead of 10 000. What changes?
 3. Why is the error on $\sigma$ different from the error on the mean?
 
-Notebook: `course/lab1/ex_A.ipynb`  ·  Reference: ROOT [RooFit tutorials](https://root.cern/doc/master/group__tutorial__roofit__main.html), in C++ and Python: `rf101_basics`, `rf201_composite`, `rf202_extendedmlfit`
+Notebook: [`course/lab1/ex_A.ipynb`](../lab1/ex_A.ipynb)  ·  Reference: ROOT [RooFit tutorials](https://root.cern/doc/master/group__tutorial__roofit__main.html), in C++ and Python (start from `rf101_basics`)
 
 ---
 
@@ -238,14 +229,14 @@ Notebook: `course/lab1/ex_A.ipynb`  ·  Reference: ROOT [RooFit tutorials](https
 | Object | Role | Example |
 |---|---|---|
 | `RooRealVar` | variable / parameter, with range | `x`, `mean` |
-| pdf (derives from `RooAbsPdf`) | normalised density | `RooGaussian`, `RooExponential` |
+| `RooGaussian` / `RooExponential` | normalised density | pdfs derived from `RooAbsPdf` (see [the list of pdfs](../../docs/roofit_pdfs.md)) |
 | `RooDataSet` / `RooDataHist` | unbinned / binned data | `generate`, `generateBinned` |
 | `RooPlot` | frame to overlay data, pdf, pulls | `x.frame()` |
 
 Rules of thumb
 - Observables have a **range**; parameters have a **range and a start value**
 - A pdf is **normalised over the observable** automatically
-- `fitTo` minimises $-\ln L$ with MINUIT (more in Lab 2)
+- `fitTo` minimises $-\ln L$ with MINUIT, the minimisation library of ROOT (more in Lab 2)
 
 ---
 
@@ -263,11 +254,13 @@ $$-\ln L = \sum_j \big[\nu_j(\theta) - n_j \ln \nu_j(\theta)\big]$$
 - Binned loses information if bins are wide; unbinned is slower with many events
 - **In RooFit** the pdf and the code are the same: only the dataset changes (`RooDataSet` unbinned, `RooDataHist` binned)
 
+*More: [binned likelihood and $\chi^2$](./lab1_backup.md)*
+
 ---
 
 # Exercise B (≈ 55 min)
 
-**B1. LHCb $B^0_s$ mass** — file `examples/lhcb-b0-ppbar/data/b0_invariant_mass.root`.
+**B1. LHCb $B^0_s$ mass** — file [`examples/lhcb-b0-ppbar/data/b0_invariant_mass.root`](../../examples/lhcb-b0-ppbar/data/b0_invariant_mass.root).
 Import the histogram as a `RooDataHist`. Fit a Breit–Wigner. Add a Gaussian
 resolution and compare the result with the PDG mass.
 
@@ -275,9 +268,9 @@ resolution and compare the result with the PDG mass.
 Generate the sum of $N$ uniform variables, fit a Gaussian, check the **tails**
 for $N$ = 2, 5, 10, 20. Where does the Gaussian stop being a good model?
 
-*Inspired by LHCb, “First observation of the rare purely baryonic decay $B^0 \to p\bar p$”.*
+*Inspired by LHCb, [“First observation of the rare purely baryonic decay $B^0 \to p\bar p$”](https://arxiv.org/abs/1709.01156).*
 
-Notebook: `course/lab1/ex_B.ipynb`
+Notebook: [`course/lab1/ex_B.ipynb`](../lab1/ex_B.ipynb)
 
 ---
 
@@ -287,23 +280,50 @@ Notebook: `course/lab1/ex_B.ipynb`
 
 ---
 
-# Adding pdfs: extended vs shape-only
+# Adding components: signal + background (1)
+
+Two components of the model of a channel: the signal pdf $f_s(x)$ and the background pdf $f_b(x)$.
+
+**Shape-only**: one fraction $\phi$ of signal
+$$\prod_{i=1}^{n}\Big[\phi\,f_s(x_i)+(1-\phi)\,f_b(x_i)\Big]$$
+
+**Extended**: the expected numbers of signal and background events, $\nu_s$ and $\nu_b$
+$$\text{Pois}(n\,|\,\nu_s+\nu_b)\;\prod_{i=1}^{n}\frac{\nu_s\,f_s(x_i)+\nu_b\,f_b(x_i)}{\nu_s+\nu_b}$$
+
+---
+
+# Adding components: signal + background (2)
+
+| | **Shape-only** | **Extended** |
+|---|---|---|
+| free parameters (besides the shapes) | **1**: $\phi$, fraction of signal | **2**: $\nu_s$, $\nu_b$, expected numbers of signal and background events |
+| total number of events | $n$ fixed by the data | $n$ is Poisson, with $\nu = \nu_s+\nu_b$ |
+| number of signal events | derived: $\hat\phi\,n$ | fitted: $\hat\nu_s$ |
+
+With $\phi = \nu_s/(\nu_s+\nu_b)$: **the extended model has one more free parameter**, the total number of events.
+
+- **Shape-only fit:** a mixture of $k$ normalised pdfs needs only $k-1$ independent coefficients, because their sum must be one
+- **Extended fit:** each component has its own yield parameter, so $k$ components need $k$ independent yield parameters
+
+---
+
+# Adding components in RooFit: `RooAddPdf`
 
 The **number of coefficients** tells RooFit what you mean.
 
-**Extended**: one coefficient per pdf = the **number of events** of each component. This is the marked Poisson model of Talk A: $\mathcal{L}=\text{Pois}(n\,|\,N_s+N_b)\prod_i \frac{N_s f_{\rm sig}(x_i)+N_b f_{\rm bkg}(x_i)}{N_s+N_b}$
+- **Extended**: one coefficient per component = the numbers of events
+- **Shape-only**: one coefficient fewer = the fractions. The last is $1-\sum$
+- The number of coefficients is the number of free parameters: **2** for extended ($\nu_s$, $\nu_b$), **1** for shape-only ($\phi$)
 
 ```python
+# extended: 2 components, 2 coefficients (numbers of events)
 model = ROOT.RooAddPdf("model", "sig+bkg", ROOT.RooArgList(sig, bkg), ROOT.RooArgList(nsig, nbkg))
-```
-
-**Shape-only**: **one coefficient fewer** = fractions, the last is $1-\sum$. The total number of events is fixed by the data: $f = f_s f_{\rm sig} + (1-f_s) f_{\rm bkg}$
-
-```python
+# shape-only: 2 components, 1 coefficient (fraction)
 model = ROOT.RooAddPdf("model", "sig+bkg", ROOT.RooArgList(sig, bkg), ROOT.RooArgList(fsig))
-model.fitTo(data)    # the extended term is included automatically when needed
-```
 
+model.fitTo(data)                       # the extended term is included automatically when needed
+model.plotOn(frame, Components="bkg")   # draw one component
+```
 ---
 
 # Getting data in: RDataFrame in one slide
@@ -321,10 +341,12 @@ h  = df.Histo1D(("h", ";m;events", 100, 100, 150), "m")
 ```
 
 - Lazy: nothing runs until you ask for a result; **one event loop** for all results
-- The expression is **C++ compiled just in time**: Python convenience, C++ speed (try it in exercise C4)
+- The expression is **C++ compiled just in time**: Python convenience, C++ speed (try it in [Ex C4](../lab1/ex_C.ipynb))
 - Multi-threading with `ROOT.EnableImplicitMT()`
-- Full RDataFrame treatment: Lab 4 (systematic variations with `Vary`)
-- Fill a `RooDataSet` from RDataFrame: see `unbinned.cpp` in the ROOT Team course
+- Full `RDataFrame` treatment: Lab 4 (systematic variations with `Vary`)
+- To fill a `RooDataSet`: see [`unbinned.cpp`](../../third_party/root-cpp-course-roofit/unbinned.cpp) (ROOT Team course)
+
+*More: [RDataFrame in three lines](./lab1_backup.md)*
 
 ---
 
@@ -336,14 +358,14 @@ h  = df.Histo1D(("h", ";m;events", 100, 100, 150), "m")
 
 # Exercise C (≈ 35 min)
 
-**C1. Extended fit, signal + background** — `examples/lhcb-b0-ppbar/data/rarest_b0_decay.dat`
+**C1. Extended fit, signal + background** — [`examples/lhcb-b0-ppbar/data/rarest_b0_decay.dat`](../../examples/lhcb-b0-ppbar/data/rarest_b0_decay.dat)
 Gaussian signal + exponential background, extended ML.
-Report $N_s$, $N_b$ with errors. Plot with the components and the pulls.
+Report $\nu_s$, $\nu_b$ with errors. Plot with the components and the pulls.
 
 **C2. Same exercise, shape-only (fractions)**
 What happened to the information on the total yield?
 
-**Questions C.** Which error is larger, and why? When would you *need* the rate? Is the signal significant? (Compare $N_s$ with its error: no p-value yet, we do it in Lab 3.)
+**C3. Questions.** Which error is larger, and why? When would you *need* the rate? Is the signal significant? (Compare $\nu_s$ with its error: no p-value yet, we do it in Lab 3.)
 
 **C4. (optional, 10 min)** Count the events in a mass window with `RDataFrame` and a **C++ function** (JIT).
 
@@ -357,11 +379,11 @@ What happened to the information on the total yield?
 - unbinned vs binned likelihood, extended fits
 
 **By Lab 2**
-1. Submit **2 of the 3** notebooks of `lab1/` (A, B, C: your choice), run top to bottom with every check `PASS`
+1. Submit **2 of 3** notebooks of [`lab1/`](../lab1/) (A, B, C, your choice), every check `PASS`
 2. Upload them on **Virtuale**
 3. Read *Practical Statistics for the LHC*, sections on likelihood and nuisance parameters
 4. Open your Codespace once, to confirm it still works
 
-Solutions of all three notebooks appear after the deadline.
+We look at the solutions of all three notebooks at the beginning of Lab 2.
 
 **Next time:** MINUIT, $-\ln L$ scans, profile likelihood, nuisance parameters.

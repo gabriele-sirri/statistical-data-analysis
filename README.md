@@ -42,12 +42,13 @@ Submit 2 of 3 notebooks in each of Labs 1–3, both notebooks of Lab 4 (see [`co
 
 ## Before the course: set up ROOT
 
-Students are encouraged to **bring a laptop with a working ROOT environment, preferably iwth Python and Jupyter support** (Windows, Linux or macOS).
+Students are encouraged to **bring a laptop with a working ROOT environment, preferably with Python and Jupyter support** (Windows, Linux or macOS).
 
  If this is not possible, or if you cannot run ROOT, you can use  **GitHub Codespaces in a browser on the lab computers** (a free GitHub account is required: create it before the first lab).
 
 1. Install ROOT with the guides in [`docs/`](docs/):
    [Windows](docs/root_on_windows.md) · [Windows with WSL](docs/root_on_wsl.md) · [Ubuntu](docs/root_on_ubuntu.md) · [Binder](docs/root_on_binder.md) · [Google Colab](docs/root_on_colab.ipynb).
+   Prefer C++ to Python? [RooFit in Python and C++, side by side](docs/python_cpp_roofit.md).
    For a local installation use the course environment: `conda env create -f environment.yml`.
 2. Check it: `python course/tools/check_setup.py`. Every line must say **PASS**. Do it **before Lab 1** and send the output to the instructor if something says FAIL.
 3. No working ROOT? Open the repository in Codespaces: the badge above, or *Code → Codespaces → Create codespace*.
@@ -56,6 +57,17 @@ Students are encouraged to **bring a laptop with a working ROOT environment, pre
 
 Binder and Colab are fallback options: sessions are temporary, so download your notebooks before closing.
 
+
+## References
+
+Start here: the chapters on **Probability** and **Statistics** of the [Review of Particle Physics](https://pdg.lbl.gov/) of the PDG (Reviews, Tables and Plots → Mathematical Tools). Short, standard, and updated every year.
+
+- G. Cowan, *Statistical Data Analysis*, Oxford University Press (1998)
+- K. Cranmer, *Practical Statistics for the LHC*, [arXiv:1503.07622](https://arxiv.org/abs/1503.07622)
+- G. Cowan, K. Cranmer, E. Gross, O. Vitells, *Asymptotic formulae for likelihood-based tests of new physics*, Eur. Phys. J. C 71 (2011) 1554, [arXiv:1007.1727](https://arxiv.org/abs/1007.1727)
+- F. James and M. Roos, *MINUIT*, Comput. Phys. Commun. 10 (1975) 343
+- S. Baker and R. D. Cousins, *Clarification of the use of chi-square and likelihood functions in fits to histograms*, Nucl. Instrum. Methods 221 (1984) 437
+- ROOT: [RooFit](https://root.cern/manual/roofit/), [RooStats](https://root.cern/doc/master/group__Roostats.html), [HistFactory](https://root.cern/doc/master/group__HistFactory.html), [RooFit tutorials](https://root.cern/doc/master/group__tutorial__roofit__main.html)
 
 ## License
 

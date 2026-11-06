@@ -4,7 +4,7 @@
 
 **Question.** What are the oscillation parameters ($\Delta m^2_{32}$, $\sin^2\theta_{23}$) and their uncertainties?
 
-**Source.** IceCube three-year muon-neutrino disappearance data release (arXiv:1410.7227; https://icecube.wisc.edu/science/data/nu_osc).
+**Source.** IceCube three-year muon-neutrino disappearance data release (arXiv:1410.7227; https://icecube.wisc.edu/data-releases/2015/01/icecube-oscillations-3-years-muon-neutrino-disappearance-data/).
 
 **Real measurement.** IceCube Collaboration, atmospheric muon-neutrino disappearance with three years of DeepCore data: [arXiv:1410.7227](https://arxiv.org/abs/1410.7227).
 
