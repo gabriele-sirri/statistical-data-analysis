@@ -58,6 +58,10 @@ Students are encouraged to **bring a laptop with a working ROOT environment, pre
 Binder and Colab are fallback options: sessions are temporary, so download your notebooks before closing.
 
 
+## Where to find a topic
+
+From the statistical problem to the tool, and where it is taught: the [index of the topics](course/topics.md). The [gallery of examples](examples/) shows the same tools on real measurements.
+
 ## References
 
 Start here: the chapters on **Probability** and **Statistics** of the [Review of Particle Physics](https://pdg.lbl.gov/) of the PDG (Reviews, Tables and Plots → Mathematical Tools). Short, standard, and updated every year.

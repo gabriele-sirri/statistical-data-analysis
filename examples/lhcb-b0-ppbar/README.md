@@ -6,6 +6,10 @@
 
 **Reference figure.** Figure 1 of the paper: the $p\bar p$ invariant mass of the selected candidates, with the fit and its components (a peak at the $B^0$ mass, a peak at the $B^0_s$ mass, a combinatorial background). The exercise reproduces it. More on the result: [CERN Courier, “The rarest B⁰ decay ever observed”](https://cerncourier.com/a/the-rarest-b0-decay-ever-observed/).
 
+**Our fit** (Lab 1, Exercise C):
+
+![w:520](fit_result.png)
+
 **Real measurement.** LHCb Collaboration, “First observation of the rare purely baryonic decay B⁰→p p̄”, Phys. Rev. Lett. 119 (2017) 232001: [arXiv:1709.01156](https://arxiv.org/abs/1709.01156), [doi:10.1103/PhysRevLett.119.232001](https://doi.org/10.1103/PhysRevLett.119.232001). The data of this folder are a simplified version built for teaching.
 
 **The statistical task.** A signal over a combinatorial background in one observable, the mass: fit a model with a peak and a background, count the signal events, estimate their uncertainty, and ask whether the peak is significant.

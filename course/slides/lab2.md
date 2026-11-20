@@ -30,13 +30,22 @@ Discuss in pairs, then we compare:
 
 ---
 
+# Recap: answers
+
+1. $P=\text{Pois}(n\,|\,\nu)\prod_i f(x_i)$: the **rate** is the Poisson term (how many events), the **shape** is the product of the pdfs (where they are). A **channel** is a subset of the data, selected with a criterion. A **component** is the part of the model for one physics process
+2. With **fractions** the total $n$ is **not used**: one parameter fewer ($\phi$ instead of $\nu_s$ and $\nu_b$)
+3. A $\chi^2$ fit assumes Gaussian counts. With few counts, or empty bins, the **Poisson likelihood is exact**
+4. The hardest cells: we open them in the solutions, next
+
+---
+
 # Solutions of Lab 1 (15 minutes)
 
-The solutions are in the `solutions` branch: [`solutions/lab1/`](https://github.com/gabriele-sirri/statistical-data-analysis/tree/solutions/solutions/lab1), from today.
+The solutions are in the `solutions` branch: [`solutions/lab1/`](../../solutions/lab1), from today.
 
-- **[A](https://github.com/gabriele-sirri/statistical-data-analysis/blob/solutions/solutions/lab1/ex_A_solution.ipynb)**: the Gaussian fit and the **ranges** of a parameter and of an observable (A1, A3)
-- **[B](https://github.com/gabriele-sirri/statistical-data-analysis/blob/solutions/solutions/lab1/ex_B_solution.ipynb)**: the **binned** Breit–Wigner fit and the central limit theorem (B1, B2)
-- **[C](https://github.com/gabriele-sirri/statistical-data-analysis/blob/solutions/solutions/lab1/ex_C_solution.ipynb)**: **extended** and **shape-only** fits, and the number of free parameters (C1, C2)
+- **[A](../../solutions/lab1/ex_A_solution.ipynb)**: the Gaussian fit and the **ranges** of a parameter and of an observable (A1, A3)
+- **[B](../../solutions/lab1/ex_B_solution.ipynb)**: the **binned** Breit–Wigner fit and the central limit theorem (B1, B2)
+- **[C](../../solutions/lab1/ex_C_solution.ipynb)**: **extended** and **shape-only** fits, and the number of free parameters (C1, C2)
 
 ---
 
@@ -99,6 +108,16 @@ Three algorithms of **MINUIT**, the minimisation library of ROOT:
 
 ---
 
+# Seeing the likelihood: HESSE and MINOS
+
+![w:640](img/likelihood_interval.png)
+
+- **HESSE**: the parabola with the **same curvature** at the minimum: a symmetric error
+- **MINOS**: where the **real** curve rises by 0.5: it can be asymmetric. **Trust MINOS when they differ**
+- To draw the curve we **scan** one parameter, with the others fixed (*slice*) or re-fitted (*profile*): Talk B explains the difference. In Exercise A you see both
+
+---
+
 # Is my fit healthy?
 
 Always check:
@@ -109,7 +128,7 @@ Always check:
 | `covQual()` | 3 (full, accurate covariance) |
 | EDM (estimated distance to minimum) | tiny |
 | parameters at a limit? | none |
-| correlation coefficients | no $|\rho|\approx 1$ |
+| correlation coefficients | no $\lvert\rho\rvert\approx 1$ |
 
 A parameter stuck at its **limit** is a warning, not a result.
 
@@ -123,7 +142,7 @@ When a fit fails, follow this checklist in order:
    - Parameter ranges too wide? Initial values too far from the likelihood minimum? 
    - *Fix*: `setRange()` narrower, `setVal()` to reasonable value.
 
-2. **Converges but huge errors or correlation |ρ| ≈ 1**
+2. **Converges but huge errors or correlation $\lvert\rho\rvert\approx 1$**
    - Parameters are degenerate (the fit cannot distinguish them).
    - *Fix*: fix one of the two parameters, or reformulate the model.
 
@@ -164,12 +183,15 @@ Notebook: [`course/lab2/ex_A.ipynb`](../lab2/ex_A.ipynb)
 
 ### Key Takeaways from Hands-on A
 
-- **`fitTo()` demystified**: It creates an NLL, runs `RooMinimizer(nll).migrad()`, then `.hesse()`.
-- **Statefulness**: After a fit, `RooRealVar` objects *automatically update* their central value and error. Just call `var.getVal()` and `var.getError()`.
-- **Plotting Components**: `model.plotOn(frame, ROOT.RooFit.Components("bkg_name"), ROOT.RooFit.LineStyle(ROOT.kDashed))`
-- **Profiling**: `nll.createProfile(poi)` creates a function that re-minimizes nuisance parameters for each point of the POI.
-- **Contours**: `minimizer.contour(var1, var2, 1, 2)` draws $\Delta\text{NLL}$ contours. **Crucial**: Always run `minimizer.hesse()` immediately before `contour()` to ensure a clean, accurate error matrix and avoid stray points.
+**Statistics**
+- **HESSE** is a parabola at the minimum. **MINOS** follows the real curve: if they differ, **trust MINOS**
+- A **scan** of $-\ln L$ keeps the other parameters fixed (*slice*) or re-fits them (*profile*): Talk B
+- A contour shows the **correlation**: $\lvert\rho\rvert\approx 1$ means degenerate parameters
 
+**RooFit**
+- `fitTo()` = NLL → `RooMinimizer`: `.migrad()`, `.hesse()`, `.minos()`. After a fit, `var.getVal()` and `var.getError()` hold the result
+- `nll.createProfile(poi)` and `minimizer.contour(v1, v2, 1, 2)`: run **`hesse()` right before** the contour
+- `plotOn(frame, Components("bkg"), LineStyle(kDashed))` draws one component
 ---
 
 <!-- _class: lead -->
@@ -191,7 +213,7 @@ $$-2\ln\frac{L(\mu)}{L(\hat\mu)} \;\sim\; \chi^2_1$$
 | 95 % | 1.92 | 3.84 |
 
 The interval is where the NLL curve $ -\ln L $ is below the minimum **+ 0.5**.
-It need not be symmetric: this is the **MINOS interval**.
+It need not be symmetric: this is the **MINOS interval** (see the figure of Talk A).
 
 ---
 
@@ -249,62 +271,85 @@ Notebook: [`course/lab2/ex_B.ipynb`](../lab2/ex_B.ipynb)
 
 ### Key Takeaways from Hands-on B
 
-- **Profile vs. Slice**: A slice fixes nuisance parameters. A profile (`createProfile`) re-optimizes them.
-- **MINOS = Profile Scan**: The `MINOS` algorithm in MINUIT is *exactly* the numerical evaluation of the profile likelihood interval ($\Delta\text{NLL} = 0.5$). They must match.
-- **The role of $\tau$**: Propagates the background uncertainty from the control region to the signal region.
+**Statistics**
+- A **slice** fixes the nuisance parameters, a **profile** re-fits them: the profile is wider. **MINOS is the profile scan**: they must match
+- The uncertainty on $b$ **comes from the control region** ($\tau$): a poorer control region widens the interval
 
+**RooFit**
+- The on/off model: `RooFormulaVar` for $s+b$ and $\tau b$, two `RooPoisson`, and a `RooProdPdf`
+- `nll.createProfile(poi)` draws the profile; `RooMinimizer` gives HESSE and MINOS
 ---
 
 <!-- _class: lead -->
 # Talk C
-## Residuals, Pulls and Toy MC
+## Toy MC and pulls
 
 ---
 
-# Residuals vs. Pulls: What are we looking at?
+# Testing the fit with Toy MC
 
-- **Residuals**: Evaluated on the **observable** ($x$) for a given **dataset** (real or simulated). 
-  - Formula: $(N_{\text{data}} - N_{\text{model}}) / \sigma_{\text{model}}$
-  - Purpose: Check the *goodness-of-fit* of the model shape.
+HESSE and MINOS errors are **approximations**: they assume a likelihood close to a parabola. Is it true for **my** model, with **my** statistics? A toy study answers:
 
-- **Pulls**: Evaluated on the **parameters** ($\theta$) of the model. Requires an ensemble of **Toy Monte Carlo** experiments.
-  - Formula: $\text{pull} = \frac{\hat{\theta} - \theta_{\text{true}}}{\hat{\sigma}_{\theta}}$
-  - Purpose: Check the *statistical properties* of the fitter (bias, error estimation, coverage).
+1. **Generate** a dataset from the model, with **known true** parameters
+2. **Fit** it, exactly as you fit the data
+3. **Record** the fitted values and their errors
+4. **Repeat** 300–1000 times, and look at the **distribution** of the results
 
----
-
-# Why toys?
-
-Errors from HESSE or MINOS are **approximations**. A toy study tests them:
-
-1. Generate a dataset with known true parameters
-2. Fit it
-3. Save the result. Repeat 300–1000 times
-   
-## What do Pull distributions tell us?
-For a healthy, unbiased fit with correctly estimated errors, the pull distribution should be a standard Gaussian $\mathcal{N}(0, 1)$:
-1. **Mean $\approx 0$**: No systematic bias in the estimator $\hat{\theta}$.
-2. **RMS $\approx 1$**: The fit errors $\hat{\sigma}_{\theta}$ correctly reflect the true statistical fluctuations.
-3. **Coverage**: The fraction of toys where the true value falls within the $1\sigma$ interval should be $\approx 68\%$.
+In RooFit, the class **`RooMCStudy`** runs this loop for you.
 
 ---
 
-# What goes wrong at low statistics
+# The pull
 
-- Poisson fluctuations make the likelihood **non-parabolic**
-- Parameters hit **boundaries** (e.g. $\nu_s \ge 0$): pulls are no longer Gaussian
-- A small bias on the mean is common; a wrong RMS means **wrong errors**
+For each toy, compare the fit with the truth, **in units of the error that the fit quotes**:
 
-Remedy: report **MINOS or profile intervals**, or run a Neyman construction with toys (Lab 3).
+$$\text{pull} = \frac{\hat{\theta} - \theta_{\text{true}}}{\hat{\sigma}_{\theta}}$$
 
-Always check the **fraction of failed fits**: toys that fail to converge are not “missing”, they are data about your model.
+- **numerator**: how far the fit is from the truth
+- **denominator**: how large the fit *says* its error is
+- If $\hat\theta$ is unbiased and $\hat\sigma_\theta$ is its true spread, the pulls of the toys follow a **standard Gaussian** $\mathcal{N}(0,1)$
+
+The pull is **one number per toy**: we need many toys to see its distribution.
 
 ---
 
-<!-- _class: lead -->
-# Hands-on C
-## Pulls, bias, coverage
+# What to look at in the pull distribution
 
+| Look at | Healthy | If not |
+|---|---|---|
+| **Mean** | $\approx 0$ | $\neq 0$: **bias** of the estimator ($+0.4$: on average $0.4\,\sigma$ above the truth) |
+| **RMS** | $\approx 1$ | $>1$: **the uncertainty is underestimated** (the fit is too optimistic). $<1$: overestimated (too conservative) |
+| **Coverage**: fraction of toys with $\lvert\text{pull}\rvert<1$ | $\approx 68\%$ ($95\%$ for $\lvert\text{pull}\rvert<2$) | smaller: errors too small. Larger: errors too large |
+| **Shape** | Gaussian | skewed or with tails: the likelihood is **not a parabola** |
+| **Failed fits** | none | count them: they are information about the model |
+
+---
+
+# Four typical pull distributions
+
+![w:1000](img/pull_diagnosis.png)
+
+**RMS larger than 1: the quoted uncertainty is smaller than the real spread.**
+
+---
+
+# Low statistics: the problem, the symptom, the way out
+
+- **The problem**: with few events the likelihood is **not a parabola**, and parameters hit **boundaries** ($\nu_s\ge0$). HESSE assumes a parabola, so its error is not reliable
+- **The symptom**: the **pulls** (Exercise C): mean $\neq0$, RMS $\neq1$, a skewed shape, failed fits
+- **The way out**: **MINOS or profile** intervals follow the real curve (Talks A and B). For exact coverage, a Neyman construction with toys (Lab 3)
+
+![w:760](img/pull_33_vs_5.png)
+
+Toys that fail to converge are not "missing": they are information about the model.
+---
+
+# A note: residuals are not pulls
+
+The formulas look alike, but they answer different questions:
+
+- **Residuals** (observable, one dataset): $(N_{\text{data}}-N_{\text{model}})/\sigma_{\text{model}}$, bin by bin. Is the **shape** of the model good?
+- **Pulls** (parameters, many toys): $(\hat\theta-\theta_{\text{true}})/\hat\sigma_\theta$. Is the **fitter** good: bias, errors, coverage?
 ---
 
 <!-- _class: lead -->
@@ -331,11 +376,15 @@ Notebook: [`course/lab2/ex_C.ipynb`](../lab2/ex_C.ipynb)
 
 ### Key Takeaways from Hands-on C
 
-- **`RooMCStudy`**: The native, highly optimized C++ class for Toy Monte Carlo. It handles the generation loop, the fitting, and memory management automatically. *Never write a manual Python loop for toys if you can use this!*
-- **`plotPull(var)`**: A built-in method of `RooMCStudy` that generates a beautiful `RooPlot` showing the pull distribution for a specific parameter, complete with a Gaussian fit overlay and mean/sigma statistics.
-- **`pullDist(var)` / `fitPar(var)`**: Methods to extract the raw `TH1` histograms of the pulls or the fitted parameter values for further custom analysis.
-- **Statefulness in Toys**: When generating toys, `RooMCStudy` uses the *current* values of the `RooRealVar` objects as the "true" values. Always set your parameters to the desired true values before calling `generateAndFit()`.
+**Statistics**
+- Read the pulls: **mean** (bias), **RMS** (RMS $>1$: uncertainty underestimated), **coverage** (68%), **shape**
+- **Count the failed fits**: they are information about the model
 
+**RooFit**
+- **`RooMCStudy`** runs generate and fit, resets the parameters at each toy, and **generates with the current values**: set the truth *before* creating the study
+- `plotPull(var, FitGauss(True))` draws the pulls. `fitParDataSet().Print("v")` lists **all the variables** (`nsig`, `nsigerr`, `nsigpull`, ...)
+- **Technicality: failed fits = number of toys − number of rows of the dataset**
+- One process: for many toys use many jobs, with **different seeds** (backup)
 ---
 
 # Open lab (20 min)
