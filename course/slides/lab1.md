@@ -216,6 +216,19 @@ Generate 10 000 **unbinned** events, fit with ML, plot the result.
 
 Notebook: [`course/lab1/ex_A.ipynb`](../lab1/ex_A.ipynb)  ·  Reference: ROOT [RooFit tutorials](https://root.cern/doc/master/group__tutorial__roofit__main.html), in C++ and Python (start from `rf101_basics`)
 
+
+---
+
+### Key Takeaways from Hands-on A
+
+**Statistics**
+- An **observable** needs a **range** (it defines the model). A **parameter** needs a start value and a **limit**, which steers the minimiser
+- **Unbinned** uses every event, **binned** only the counts per bin: for narrow bins they agree
+
+**RooFit**
+- `RooRealVar("x","x",min,max)` is an observable, `RooRealVar("p","p",start,min,max)` a parameter
+- `pdf.generate(...)` gives a `RooDataSet`, `generateBinned(...)` a `RooDataHist`. `fitTo(data, Save=True)` returns the `RooFitResult`
+- `x.setRange("fit",lo,hi)` and `fitTo(..., Range="fit")` fit a sub-range
 ---
 
 <!-- _class: lead -->
@@ -272,6 +285,18 @@ for $N$ = 2, 5, 10, 20. Where does the Gaussian stop being a good model?
 
 Notebook: [`course/lab1/ex_B.ipynb`](../lab1/ex_B.ipynb)
 
+
+---
+
+### Key Takeaways from Hands-on B
+
+**Statistics**
+- A resonance has a **natural width**, the detector adds a **resolution**: the fit of a Breit–Wigner alone mixes the two
+- The **central limit theorem** describes the **bulk**: the tails converge slowly
+
+**RooFit**
+- `RooDataHist` for a histogram, `RooBreitWigner` for the line shape, and `RooVoigtian` (Breit–Wigner ⊗ Gaussian) for the resolution
+- Check the result against a known value (here the PDG mass)
 ---
 
 <!-- _class: lead -->
@@ -369,6 +394,18 @@ What happened to the information on the total yield?
 
 **C4. (optional, 10 min)** Count the events in a mass window with `RDataFrame` and a **C++ function** (JIT).
 
+
+---
+
+### Key Takeaways from Hands-on C
+
+**Statistics**
+- **Extended** fit: $\nu_s$ and $\nu_b$ are parameters, the data constrain shape **and** rate. **Shape-only**: only the fraction $\phi$, one parameter fewer
+- In the extended fit the error on $\nu_s$ includes the **Poisson fluctuation of $n$**: $n$ is not fixed
+
+**RooFit**
+- `RooAddPdf` with **as many coefficients as pdfs**: extended. With **one fewer**: fractions
+- `plotOn(frame, Components("bkg"))` draws one component
 ---
 
 # Wrap-up and submission (before Lab 2, in 2 weeks)

@@ -43,3 +43,14 @@ Risks of a generic minimiser:
 - **Comparison**: harder to compare with published results
 
 And MINUIT is **not magic**: it can stop in a local minimum or at a limit. Always read the **status**, the **EDM** and `covQual`.
+
+---
+
+# Backup: many toys on a cluster, and the seeds
+
+- `RooMCStudy` runs in **one process**, and the toys are generated one after the other. To produce many toys, run **many independent jobs** (batch, grid)
+- **The seed is your responsibility.** The same seed gives the **same toys**: two jobs with the same seed duplicate the sample, and the statistics are fake
+- `ROOT.RooRandom.randomGenerator().SetSeed(0)`: a seed of 0 asks ROOT for a **different seed at every run**. Or use the job number as the seed: reproducible, and different for each job
+- A single fit can also be split over several cores (option `NumCPU` of `fitTo`): different from running many toys in parallel
+- In the course the seed is your **student ID**: your toys are yours, and they are reproducible
+

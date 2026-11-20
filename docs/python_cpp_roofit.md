@@ -2,7 +2,7 @@
 
 The notebooks of the course are in Python (PyROOT). If you prefer **C++**, you can do the same exercises in a macro: the RooFit objects are the same, only the syntax changes.
 
-*This table has not been compiled against every ROOT version: if a line does not work, check the [RooFit tutorials](https://root.cern/doc/master/group__tutorial__roofit__main.html), which show every example in both languages.*
+The [RooFit tutorials](https://root.cern/doc/master/group__tutorial__roofit__main.html) show every example in both languages.
 
 ## How to run
 
