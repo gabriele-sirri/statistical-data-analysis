@@ -221,10 +221,10 @@ It need not be symmetric: this is the **MINOS interval** (see the figure of Talk
 
 A model has **parameters of interest** $\mu$ and **nuisance parameters** $\theta$ (background rate, resolution, efficiency…).
 
-Two ways to draw the likelihood in $\mu$:
+Two ways to scan the likelihood in $\mu$:
 
 - **Slice**: fix $\theta$ at its best-fit value → too optimistic, ignores uncertainty
-- **Profile**: for every $\mu$, re-fit $\theta$ → correct frequentist coverage.
+- **Profile**: for every $\mu$, re-fit $\theta$ → correct frequentist coverage via the **profile likelihood ratio**:
 
 $$\lambda(\mu)=\frac{L\big(\mu,\hat{\hat\theta}(\mu)\big)}{L(\hat\mu,\hat\theta)}, \qquad q(\mu) = -2\ln\lambda(\mu)$$
 
@@ -342,6 +342,7 @@ The pull is **one number per toy**: we need many toys to see its distribution.
 ![w:760](img/pull_33_vs_5.png)
 
 Toys that fail to converge are not "missing": they are information about the model.
+
 ---
 
 # A note: residuals are not pulls

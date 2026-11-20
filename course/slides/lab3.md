@@ -75,14 +75,16 @@ The solutions are in the `solutions` branch: [`solutions/lab2/`](../../solutions
 
 # Two ways to model a systematic
 
-A nuisance parameter $\theta$ is known only up to an uncertainty. Where does that knowledge come from?
+A nuisance parameter $\theta$ is a quantity needed in the model, known only up to an uncertainty.  
+Where does our knowledge of $\theta$ come from?
 
-| | Auxiliary measurement | Constraint term |
+| | **Auxiliary measurement** | **Constraint term** |
 |---|---|---|
-| What you write | the likelihood of the control data | a pdf for the *result* of that measurement |
-| Example | $\text{Pois}(n_{\rm off}\,|\,\tau b)$ | $\text{Gauss}(b_0\,|\,b,\sigma_b)$ |
-| You need | the control data | only the summary $b_0\pm\sigma_b$ |
-| Typical use | a sideband, a control region you fit | “background $3.8\pm0.6$” from a publication or a separate group |
+| Source of knowledge | a dedicated measurement we perform | an external result (a publication or another group) |
+| Concrete case | fitting a sideband or control region | using a quoted value (e.g., “bkg = $3.8 \pm 0.6$”) |
+| You need | the control data $n_{\rm off}$ | only the published estimate $\hat{\beta}\pm\sigma_{\hat{\beta}}$ |
+| What you write | the likelihood of the control data | a PDF treating $\hat{\beta}$ as a *global observable*, $\hat{\beta} \rightarrow b_0$ |
+| Example | $\text{Pois}(n_{\rm off}\,\vert\,\tau \beta)$ | $\text{Gauss}(b_0\,\vert\,\beta,\sigma_{\hat{\beta}})$ |
 
 Both enter the likelihood **as a factor**. The second is an approximation of the first.
 
@@ -90,19 +92,22 @@ Both enter the likelihood **as a factor**. The second is an approximation of the
 
 # From on/off to a Gaussian constraint
 
-The control measurement gives $\hat b_0=n_{\rm off}/\tau$ with $\sigma_b=\sqrt{n_{\rm off}}/\tau$.
+The control measurement gives $b_0=n_{\rm off}/\tau$ with $\sigma_{\hat \beta}=\sqrt{n_{\rm off}}/\tau$.
 
 For large $n_{\rm off}$:
 
-$$\text{Pois}(n_{\rm off}\,|\,\tau b)\;\approx\;\text{Gauss}(b_0\,|\,b,\sigma_b)$$
+$$\text{Pois}(n_{\rm off}\,\vert\,\tau \beta)\;\approx\;\text{Gauss}(b_0\,\vert\,\beta,\sigma_{\hat \beta})$$
 
-- Good for $n_{\rm off}\gtrsim 30$–$50$. Bad for few counts: the Gaussian is symmetric, allows $b<0$, and **overstates significance**
+- Good for $n_{\rm off}\gtrsim 30$–$50$. 
+  Bad for few counts: the Gaussian is symmetric, allows $\beta<0$, and **overstates significance**
 - Positive, multiplicative uncertainty (efficiency, luminosity)? use a **log-normal**
-- Counts with a known $\tau$? the exact companion of the Poisson is a **Gamma**
+- Few Poisson counts? a **Gamma** constraint matches the exact Poisson shape
 
 Rule: **use the measurement when you have it; use a constraint when you only have its result.**
 
-![w:640](img/poisson_vs_gauss.png)
+---
+
+![w:1200](img/poisson_vs_gauss.png)
 
 ---
 
@@ -110,9 +115,10 @@ Rule: **use the measurement when you have it; use a constraint when you only hav
 
 $$L(\mu,\vec\theta)=\underbrace{\text{Pois}\big(n\,|\,\nu(\mu,\vec\theta)\big)\prod_{i=1}^{n} f(x_i\,|\,\mu,\vec\theta)}_{\text{extended marked Poisson}}\;\times\;\underbrace{\prod_j c_j(a_j\,|\,\theta_j)}_{\text{constraints}}$$
 
-- $a_j$ = result of the auxiliary measurement: a **global observable**
+- $a_j$ = is a proxy for a result of the auxiliary measurement: a **global observable**
 - In the **fit**: $a_j$ are constants. In **toys**: $a_j$ are re-thrown with the data (frequentist)
-- RooFit: `createNLL(data, GlobalObservables(...))`; RooStats: `ModelConfig.SetGlobalObservables`
+- RooFit: `createNLL(data, GlobalObservables(...))`; 
+  RooStats: `ModelConfig.SetGlobalObservables`
 
 ---
 
@@ -127,7 +133,7 @@ $$L(\mu,\vec\theta)=\underbrace{\text{Pois}\big(n\,|\,\nu(\mu,\vec\theta)\big)\p
 Top-quark case: $n_{\rm on}=17$, $n_{\rm off}=40$, $\tau=10.53$, i.e. “background $3.8\pm0.6$”.
 
 1. Build the model with a **Gaussian constraint** on $b$ (global observable $b_0=3.80$, $\sigma_b=0.60$)
-2. Compute the **significance** $Z_0$ for both models (auxiliary Poisson, Gaussian): they should agree
+2. Compute the **significance** $Z_0$ for both models (auxiliary Poisson measurement, Gaussian contraint term): they should agree
 3. Repeat with a poor control region ($n_{\rm off}=4$, $\tau=1.053$): which model is **too optimistic**?
 4. When is it fine to use a constraint?
 
@@ -139,12 +145,12 @@ Notebook: [`course/lab3/ex_A.ipynb`](../lab3/ex_A.ipynb)
 ### Key Takeaways from Hands-on A
 
 **Statistics**
-- A **constraint** is the pdf of an **auxiliary measurement**: a Gaussian of $b_0$ around $b$. The measurement $b_0$ is a number, not a data event
+- A **constraint** is the PDF of an external estimate: e.g., $\text{Gauss}(b_0 \mid \beta, \sigma_{\hat{\beta}})$ centered on the true parameter $\beta$. Here $b_0$ is a fixed number (*global observable*), not an event in the dataset.
 - A **poor control region** means a **large** uncertainty on $b$, and a **lower** significance
 
 **RooFit**
 - `RooGaussian(b0, b, sigma_b)` is the constraint, multiplied by the model with `RooProdPdf`
-- `createNLL(data, GlobalObservables(b0))` tells the fit that $b_0$ is a **global observable**, not a free variable
+- `createNLL(data, GlobalObservables(b0))` tells the fit that $b_0$ is a **global observable**, not a free variable (so RooFit randomizes it properly in frequentist toys)
 ---
 
 <!-- _class: lead -->
@@ -153,38 +159,40 @@ Notebook: [`course/lab3/ex_A.ipynb`](../lab3/ex_A.ipynb)
 
 ---
 
-# Roles in RooStats
+# From the model to a statement
 
-RooStats needs every element of the model to have a **role**:
+Three questions, **one likelihood**:
+
+| Question | Statement | Tool |
+|---|---|---|
+| how significant is the excess? | $p$-value, $Z$ | hypothesis test ($q_0$) |
+| what is $\mu$, with its uncertainty? | interval | profile-likelihood interval |
+| nothing seen: how large can $\mu$ be? | upper limit | $\text{CL}_s$ (optional notebook) |
+
+**RooFit** builds the pdf and the likelihood. **RooStats** turns them into these statements: it works on any model, but needs to know what each element **is**.
+
+---
+
+# Roles in RooStats: `ModelConfig`
+
+
+RooStats needs every element of the model to have a **role**, via a **`ModelConfig`** object:
 
 | Element | In `ModelConfig` |
 |---|---|
 | the model | `SetPdf` |
-| parameters of interest | `SetParametersOfInterest` |
-| nuisance parameters | `SetNuisanceParameters` |
-| observables | `SetObservables` |
-| global observables | `SetGlobalObservables` |
+| parameter of interest ($\mu$ or $s$) | `SetParametersOfInterest` |
+| nuisance parameters ($b$) | `SetNuisanceParameters` |
+| observables ($n_{\rm on}$) | `SetObservables` |
+| global observables ($b_0$) | `SetGlobalObservables` |
 
-Then **calculators** work on `(data, ModelConfig)`: `ProfileLikelihoodCalculator`, `AsymptoticCalculator`, `FrequentistCalculator`, `HypoTestInverter`…
+A **calculator** takes `(data, ModelConfig)` and returns the statement: 
+`ProfileLikelihoodCalculator` (today), `AsymptoticCalculator`, `FrequentistCalculator` (toys), `HypoTestInverter` (limits).
+
+*The right roles are all RooStats needs: no change to the model.*
 
 ---
-
-# Hypothesis test and significance
-
-Null hypothesis: no signal ($\mu=0$). Test statistic ($\hat{\hat\theta}$: the nuisance parameters re-fitted with $\mu=0$ fixed, the *profile* of Lab 2):
-
-$$q_0=-2\ln\frac{L(0,\hat{\hat\theta})}{L(\hat\mu,\hat\theta)}\quad(\hat\mu\ge 0),\qquad Z=\sqrt{q_0},\qquad p=1-\Phi(Z)$$
-
-| Claim | $Z$ | $p$ (one-sided) |
-|---|---|---|
-| evidence | 3 | $1.3\times10^{-3}$ |
-| discovery | 5 | $2.9\times10^{-7}$ |
-
-**Counting estimate, background known:** ([Cowan, Cranmer, Gross, Vitells 2011](https://arxiv.org/abs/1007.1727))
-
-$$Z_A=\sqrt{2\Big[(s+b)\ln\Big(1+\frac{s}{b}\Big)-s\Big]}\;\xrightarrow{s\ll b}\;\frac{s}{\sqrt b}$$
-
-$s/\sqrt b$ **overstates** the significance when $s\gtrsim b$.
+<!--
 
 ---
 
@@ -201,6 +209,38 @@ Choose the calculator from the **question**:
 | how significant is the excess? | hypothesis test ($q_0$) |
 | what is $\mu$ and its uncertainty? | profile-likelihood interval |
 | nothing seen, how big can $\mu$ be? | $\text{CL}_s$ upper limit |
+
+---
+-->
+
+# One test statistics, two uses
+
+**Profile likelihood ratio** (Lab 2): $\;\lambda(\mu)=\dfrac{L(\mu,\hat{\hat\theta})}{L(\hat\mu,\hat\theta)}$, $\;q(\mu)=-2\ln\lambda(\mu)$
+
+| | Fix $\mu$ at | Result |
+|---|---|---|
+| **Significance** | $\mu=0$ (background only): $q_0$ | $Z=\sqrt{q_0}$, $p=1-\Phi(Z)$ |
+| **Interval** | every $\mu$: $q(\mu)\le 1$ (68 %), $3.84$ (95 %) | $[\mu_{\rm lo},\mu_{\rm hi}]$ |
+
+| Claim | $Z$ | $p$ (one-sided) |
+|---|---|---|
+| evidence | 3 | $1.3\times10^{-3}$ |
+| discovery | 5 | $2.9\times10^{-7}$ |
+
+By Wilks' theorem $q$ is asymptotically $\chi^2$: **fast, but good only for large samples**.   
+With few counts use **toys**.
+
+---
+
+# Estimating $Z$ by hand
+
+Background **known** ([Cowan, Cranmer, Gross, Vitells 2011](https://arxiv.org/abs/1007.1727)):
+
+$$Z_A=\sqrt{2\Big[(s+b)\ln\Big(1+\frac{s}{b}\Big)-s\Big]}\;\xrightarrow{s\ll b}\;\frac{s}{\sqrt b}$$
+
+- $s/\sqrt b$ **overstates** $Z$ when $s\gtrsim b$: use it as a guide, never for a result
+- $Z_A$ ignores the uncertainty on $b$: RooStats, which profiles $b$, gives a **lower** $Z$
+- In Exercise B you compare the three on the top-quark case
 
 ---
 
@@ -241,81 +281,96 @@ Notebook: [`course/lab3/ex_B.ipynb`](../lab3/ex_B.ipynb)
 
 ---
 
-# Systematics are correlated
+# Systematics are correlated across channels
 
-A systematic rarely affects one number. A **source** (charm cross section, tagging efficiency, luminosity) moves several expected numbers of events (yields) at once.
+A systematic source $k$ (e.g., luminosity, tagging efficiency, background cross section) shifts several channel yields $i$ at once by $v_{ik}$:
 
-For $N$ channels, with a source $k$ moving channel $i$ by $v_{ik}$:
+$$\beta_i = \beta_{0i} + \sum_k v_{ik}\,\theta_k, \qquad \theta_k \sim \mathcal{N}(0,1)\;\;\text{independent}$$
 
-$$\Sigma_{ij}=\sum_k v_{ik}\,v_{jk}\qquad\text{(sources independent, each fully correlated across channels)}$$
+This induces a **covariance matrix** across channels:
 
-- Independent errors per channel: $\Sigma$ **diagonal**
-- A common source: off-diagonal terms. Ignoring them changes the **size** of the uncertainty on $\mu$
+$$\Sigma_{ij} = \text{cov}(\beta_i, \beta_j) = \sum_k v_{ik}\,v_{jk}$$
 
-Question: **how much does it change the result?** Only a calculation tells.
-
----
-
-# Diagonalise: independent nuisance parameters
-
-Real symmetric $\Sigma=U\Lambda U^T$ ($\Lambda$ diagonal, eigenvalues $\lambda_k\ge 0$).
-
-$$\vec\beta=\vec\beta_0+U\sqrt{\Lambda}\,\vec z,\qquad z_k\sim\mathcal N(0,1)\;\;\text{independent}$$
-
-- One standard-normal nuisance parameter $z_k$ per **non-zero eigenvalue**
-- **Rank** of $\Sigma$ = number of independent sources: 4 channels with 3 sources → 3 nuisance parameters, not 4
-- Fully correlated errors in $N$ channels: **one** nuisance parameter
-
-This is exactly what HistFactory, `pyhf` and CMS/ATLAS combinations do under the hood.
+- **Uncorrelated errors** per channel $\rightarrow$ $\Sigma$ is **diagonal** ($\Sigma_{ij} = 0$ for $i \neq j$)
+- **Shared sources** $\rightarrow$ off-diagonal terms $\Sigma_{ij} \neq 0$; ignoring them distorts both the uncertainty on $\mu$ and the significance $Z_0$
 
 ---
 
-# A real problem: OPERA $\nu_\tau$ appearance
+# A 2-channel example: two ways to write the same model
 
-Final OPERA analysis ([arXiv:1804.04912](https://arxiv.org/abs/1804.04912), Table III): 4 channels, 10 candidates.
+Suppose 2 channels have nominal yields $\beta_{01}, \beta_{02}$ and a **single common** $10\%$ uncertainty ($\rho = 1$):
 
-| Channel | Bkg: charm | had. re-int. | large-$\mu$ scat. | Signal $\mu=1$ | Observed |
-|---|---|---|---|---|---|
-| $\tau\to1h$ | $0.15\pm0.03$ | $1.28\pm0.38$ | – | $2.96\pm0.59$ | 6 |
-| $\tau\to3h$ | $0.44\pm0.09$ | $0.09\pm0.03$ | – | $1.83\pm0.37$ | 3 |
-| $\tau\to\mu$ | $0.008\pm0.002$ | – | $0.016\pm0.008$ | $1.15\pm0.23$ | 1 |
-| $\tau\to e$ | $0.035\pm0.007$ | – | – | $0.84\pm0.17$ | 0 |
+$$\Sigma = \begin{pmatrix} \sigma_1^2 & \sigma_1\sigma_2 \\ \sigma_1\sigma_2 & \sigma_2^2 \end{pmatrix} \qquad (\det \Sigma = 0 \implies \text{rank } 1)$$
 
-- Every signal error is **≈ 20 %**. The 2015 paper lists the sources: model (10 %), $\theta_{23},\Delta m^2_{23}$ (10 %), tagging efficiency (15 %). They are common to all channels
-- Background sources are shared across channels (charm in all four)
+- **Naive way (hard):** use 2 correlated parameters $(\beta_1, \beta_2)$ with a 2D Gaussian $\mathcal{N}_2(\vec{b}_0 \mid \vec{\beta}, \Sigma)$ — fails here because $\Sigma$ is singular!
+- **Smart way (standard HEP):** write both yields using **1** standard-normal parameter $\theta \sim \mathcal{N}(0,1)$:
 
-**Assumption in this exercise:** each source is fully correlated across the channels it touches. It is our modelling choice, not the collaboration's published treatment.
+$$\beta_1 = \beta_{01} + \sigma_1\,\theta, \qquad \beta_2 = \beta_{02} + \sigma_2\,\theta$$
+
+**Takeaway:** A single shared parameter $\theta$ automatically enforces $100\%$ correlation without inverting $\Sigma$.
+
+---
+
+# General case: from any $\Sigma$ to independent $\theta_k$
+
+What if we are only given a covariance matrix $\Sigma$ (not the individual sources $v_{ik}$)?
+
+Any symmetric positive-semidefinite $\Sigma$ can be **diagonalised**:
+
+$$\Sigma = U\Lambda U^T = A A^T, \qquad A = U\sqrt{\Lambda} \quad (\text{keeping }\lambda_k > 0)$$
+
+- **Reparametrisation:** $\vec{\beta} = \vec{\beta}_0 + A\,\vec{\theta}$, with independent $\theta_k \sim \mathcal{N}(0,1)$
+- **Rank reduction:** we need **one $\theta_k$ per non-zero eigenvalue $\lambda_k$** ($\text{rank}(\Sigma)$), never more than the number of channels
+- **In RooFit (C++ / Python):** once $A$ is known, you only need linear `RooFormulaVar` expressions and 1D `RooGaussian` constraints
+
+*This is what HistFactory, `pyhf`, and LHC combinations do under the hood.*
+
+---
+
+# Hands-on problem: a 2-channel search ($e$ and $\mu$)
+
+We combine two decay channels ($e$ and $\mu$) with an excess over a large background:
+
+| Channel | Expected bkg $\beta_{0i}$ | Bkg uncertainty $\sigma_{bi}$ | Expected signal $s_i$ ($\mu=1$) | Observed $n_i$ |
+|---|---|---|---|---|
+| **$e$ channel** | $100$ | $15$ ($15\%$) | $25$ | $130$ |
+| **$\mu$ channel** | $100$ | $15$ ($15\%$) | $25$ | $128$ |
+
+$$\Sigma_b(\rho) = \begin{pmatrix} \sigma_e^2 & \rho\,\sigma_e\sigma_\mu \\ \rho\,\sigma_e\sigma_\mu & \sigma_\mu^2 \end{pmatrix}$$
+
+- **$\rho = 0$ (uncorrelated):** two independent background fluctuations can partially cancel across channels.
+- **$\rho = 1$ (fully correlated):** a single shared source (e.g., luminosity or cross section) moves both backgrounds **together** $\rightarrow$ larger uncertainty on $\mu$ and **lower significance $Z_0$**.
 
 ---
 
 <!-- _class: lead -->
 # Hands-on C
-## OPERA with a covariance matrix
+## Two channels with correlated background
 
 ---
 
-# Exercise C (≈ 40 min)
+# Exercise C ($\approx 40$ min)
 
-1. Build $\Sigma_b$ from the three background sources. **Diagonalise** it with `numpy`. Rank? Eigenvalues?
-2. Build the RooFit model: 4 Poisson terms, $\beta_i=\beta_{0i}+\sum_k A_{ik}z_k$ with $A=U\sqrt\Lambda$, constraints $\text{Gauss}(0|z_k,1)$
-3. Fit, compute the **significance** $Z_0$ and the 68 % interval on $\mu$
-4. Add a **signal uncertainty** of 20 % per channel with correlation $\rho$ between channels. Scan $\rho=0,\,0.5,\,1$
-5. How much does the interval on $\mu$ change? Does $Z_0$ change? Why?
+1. **Diagonalise $\Sigma_b(\rho)$:** build the $2\times 2$ covariance matrix and compute $A = U\sqrt{\Lambda}$ for $\rho = 0$ (rank 2) and $\rho = 1$ (rank 1)
+2. **Build the $\rho = 0$ model:** 2 Poisson terms (`pois_e`, `pois_mu`), linear background yields $\beta_i = \beta_{0i} + \sum_k A_{ik}\theta_k$, and 1D constraints $\text{Gauss}(g_k \mid \theta_k, 1)$ with $g_k = 0$
+3. **Fit and test:** measure $\hat{\mu}$, the 68% profile-likelihood interval, and the significance $Z_0$ with RooStats
+4. **Compare $\rho = 0,\, 0.5,\, 1$:** see how the interval width grows and $Z_0$ drops when the background uncertainty is fully correlated
 
 Notebook: [`course/lab3/ex_C.ipynb`](../lab3/ex_C.ipynb)
-
 
 ---
 
 ### Key Takeaways from Hands-on C
 
 **Statistics**
-- Correlated uncertainties: the **covariance matrix** $\Sigma$. We write $\Sigma = A A^T$ and give **one nuisance parameter per independent source**
-- The **number of nuisance parameters** is the **rank** of $\Sigma$
+- Correlated uncertainties are encoded in $\Sigma = A A^T$, assigning **one independent nuisance parameter $\theta_k$ per non-zero eigenvalue**
+- **Number of nuisance parameters = $\text{rank}(\Sigma)$:** 2 channels with $\rho = 1$ need **1** parameter, not 2
+- Positive correlation on the **background** reduces cancellation between channels $\rightarrow$ wider interval on $\mu$ and **lower significance $Z_0$**
 
 **RooFit**
-- `numpy.linalg.eigh` gives the eigenvalues and eigenvectors: keep the non-zero ones, $A=U\sqrt{w}$
-- Each channel gets a `RooFormulaVar` with the nuisance parameters $\theta_k$ and a `RooGaussian` constraint for each
+- Eigen-decomposition ($A = U\sqrt{\Lambda}$, keeping $\lambda_k > 0$) turns correlated channels into independent unit-normal parameters $\theta_k$
+- Each channel uses a linear `RooFormulaVar` combining $\theta_k$, paired with `RooGaussian(g_k, theta_k, 1)` ($g_k = 0$ global observable)
+
 ---
 
 # Open lab (15 min)
